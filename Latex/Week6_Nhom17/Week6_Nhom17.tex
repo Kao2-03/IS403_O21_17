@@ -169,7 +169,24 @@ LSTM thường được sử dụng để xử lý dữ liệu chuỗi thời gi
 \textbf{Kết hợp CNN và LSTM:}\\
 Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
 Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
+\subsection{LINEAR REGRESSION}
+Hồi quy tuyến tính là một phương pháp học máy thống kê được sử dụng rộng rãi, mô hình hóa mối quan hệ tuyến tính giữa biến phụ thuộc (y) và một hoặc nhiều biến độc lập (X). Nói cách khác, nó dự đoán giá trị của y dựa trên các giá trị của X. Một mô hình hồi quy tuyến tính đa biến có dạng như sau:
 
+\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+Trong đó:\\
+	\indent\textbullet\ y là biến phụ thuộc.\\
+	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) là các biến độc lập.\\
+	\indent\textbullet\ \(\beta_0\) là hệ số chặn.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_k\) hệ số tuyến tính.\\
+	\indent\textbullet\ \(\varepsilon\) là sai số.
+\subsection{XGBOOST}
+XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
+XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
+\textbf{Các tham số chính:}\\
+\textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
+\textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
+\textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
+\textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
 
 \subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
 
@@ -229,7 +246,7 @@ Quá trình huấn luyện từng cây quyết định có thể mô tả như s
   \item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
 \end{itemize}
 
-
+\section{Thực nghiệm}
 \subsection{Xây dựng mô hình}
 
 \subsubsection{RNN}
@@ -295,7 +312,7 @@ Quá trình huấn luyện từng cây quyết định có thể mô tả như s
     \label{fig:1}
 \end{figure}
 
-\subsubsection{CNN-LSTM}
+\subsubsection{LINEAR REGRESSION}
 
 \begin{figure}[H]
     \centering
@@ -357,6 +374,66 @@ Quá trình huấn luyện từng cây quyết định có thể mô tả như s
     \label{fig:1}
 \end{figure}
 
+\subsubsection{LINEAR REGRESSION}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ETH_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ETH_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ETH_91.png}
+    \end{minipage}
+    \caption{Dữ liệu ETH-USD}
+    \label{fig:1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BTC_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BTC_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BTC_91.png}
+    \end{minipage}
+    \caption{Dữ liệu BTC-USD}
+    \label{fig:1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BNB_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BNB_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/BNB_73.png}
+    \end{minipage}
+    \caption{Dữ liệu BNB-USD}
+    \label{fig:1}
+\end{figure}
 \subsection{Độ đo đánh giá}
 
 \begin{thebibliography}{9}
