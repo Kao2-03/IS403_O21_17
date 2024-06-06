@@ -170,7 +170,65 @@ LSTM thường được sử dụng để xử lý dữ liệu chuỗi thời gi
 Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
 Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
 
-\section{Thực nghiệm}
+
+\subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
+
+ARIMA, thường được gọi là phương pháp luận Box-Jenkins, là một mô hình kết hợp tự hồi quy (AR) và trung bình trượt (MA) với quá trình tích hợp (I) để dự báo dữ liệu chuỗi thời gian. 
+
+\textbf{1. Auto regression (AR):} 
+AR là thành phần tự hồi quy sử dụng các giá trị quá khứ của chính chuỗi thời gian để dự báo giá trị hiện tại. Mô hình AR($p$) được biểu diễn như sau:
+\begin{equation}
+AR(p) = \phi_0 + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \cdots + \phi_p x_{t-p}
+\end{equation}
+
+\textbf{2. Moving Average (MA):}
+MA là thành phần trung bình trượt, sử dụng các giá trị nhiễu trắng (white noise) quá khứ để dự báo giá trị hiện tại. Mô hình MA($q$) được biểu diễn như sau:
+\begin{equation}
+MA(q) = \mu + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+\end{equation}
+
+\textbf{3. Integrated (I):}
+Thành phần tích hợp (I) giúp biến đổi chuỗi thời gian thành chuỗi dừng bằng cách lấy sai phân. Quá trình sai phân bậc $d$ được thực hiện như sau:
+\begin{itemize}
+  \item Sai phân bậc 1: $I(1) = \Delta(x_t) = x_t - x_{t-1}$
+  \item Sai phân bậc $d$: $I(d) = \Delta^d(x_t) = \Delta(\Delta(\cdots \Delta(x_t))) \quad \text{(d lần)}$
+\end{itemize}
+
+Phương trình hồi quy ARIMA($p$, $d$, $q$) có thể được biểu diễn dưới dạng:
+\begin{multline}
+\Delta^d(x_t) = \phi_1 \Delta^d(x_{t-1}) + \phi_2 \Delta^d(x_{t-2}) + \cdots \\
++ \phi_p \Delta^d(x_{t-p}) + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+\end{multline}
+
+
+Tóm lại, ARIMA là mô hình kết hợp của quá trình tự hồi quy và trung bình trượt, sử dụng dữ liệu quá khứ để dự báo tương lai. Trước khi huấn luyện mô hình, chuỗi thời gian cần được chuyển hóa thành chuỗi dừng bằng cách lấy sai phân hoặc biến đổi logarit.
+
+\subsection{Random Forest}
+
+\subsubsection{Lý thuyết}
+
+Random Forest hoạt động như sau:
+
+\begin{itemize}
+  \item \textbf{Bootstrap Sampling:} Mỗi cây quyết định được huấn luyện trên một tập dữ liệu con được lấy mẫu từ tập dữ liệu huấn luyện ban đầu thông qua phương pháp tái chọn mẫu Bootstrap.
+  
+  \item \textbf{Random Feature Selection:} Trong quá trình xây dựng mỗi cây quyết định, chỉ một số lượng ngẫu nhiên các đặc trưng được chọn để tạo ra một cây quyết định.
+  
+  \item \textbf{Voting hoặc Average:} Kết quả dự đoán từ tất cả các cây được kết hợp lại để đưa ra dự đoán cuối cùng. Trong phân loại, phương pháp voting được sử dụng; trong dự đoán, thường là trung bình hoặc trọng số của các dự đoán từ các cây.
+\end{itemize}
+
+Random Forest là một phương pháp mạnh mẽ và linh hoạt, thường được sử dụng cho các bài toán phân loại và dự đoán với dữ liệu lớn và đa dạng.
+
+\subsubsection{Huấn luyện từng cây quyết định}
+
+Quá trình huấn luyện từng cây quyết định có thể mô tả như sau:
+
+\begin{itemize}
+  \item \textbf{Lấy mẫu dữ liệu:} Đặc trưng đầu vào $X$ và nhãn tương ứng $Y$. Lấy mẫu dữ liệu từ $X$ và $Y$ bằng phương pháp tái chọn mẫu Bootstrap.
+  
+  \item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
+\end{itemize}
+
 
 \subsection{Xây dựng mô hình}
 
