@@ -179,16 +179,74 @@ Trong đó:\\
 	\indent\textbullet\ \(\beta_0\) là hệ số chặn.\\
 	\indent\textbullet\ \(\beta_1,..., \beta_k\) hệ số tuyến tính.\\
 	\indent\textbullet\ \(\varepsilon\) là sai số.
-    \subsection{XGBOOST}
-    XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
-    XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
-    \textbf{Các tham số chính:}\\
-    \textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
-    \textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
-    \textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
-    \textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
-\section{Thực nghiệm}
+\subsection{XGBOOST}
+XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
+XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
+\textbf{Các tham số chính:}\\
+\textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
+\textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
+\textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
+\textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
 
+\subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
+
+ARIMA, thường được gọi là phương pháp luận Box-Jenkins, là một mô hình kết hợp tự hồi quy (AR) và trung bình trượt (MA) với quá trình tích hợp (I) để dự báo dữ liệu chuỗi thời gian. 
+
+\textbf{1. Auto regression (AR):} 
+AR là thành phần tự hồi quy sử dụng các giá trị quá khứ của chính chuỗi thời gian để dự báo giá trị hiện tại. Mô hình AR($p$) được biểu diễn như sau:
+\begin{equation}
+AR(p) = \phi_0 + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \cdots + \phi_p x_{t-p}
+\end{equation}
+
+\textbf{2. Moving Average (MA):}
+MA là thành phần trung bình trượt, sử dụng các giá trị nhiễu trắng (white noise) quá khứ để dự báo giá trị hiện tại. Mô hình MA($q$) được biểu diễn như sau:
+\begin{equation}
+MA(q) = \mu + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+\end{equation}
+
+\textbf{3. Integrated (I):}
+Thành phần tích hợp (I) giúp biến đổi chuỗi thời gian thành chuỗi dừng bằng cách lấy sai phân. Quá trình sai phân bậc $d$ được thực hiện như sau:
+\begin{itemize}
+  \item Sai phân bậc 1: $I(1) = \Delta(x_t) = x_t - x_{t-1}$
+  \item Sai phân bậc $d$: $I(d) = \Delta^d(x_t) = \Delta(\Delta(\cdots \Delta(x_t))) \quad \text{(d lần)}$
+\end{itemize}
+
+Phương trình hồi quy ARIMA($p$, $d$, $q$) có thể được biểu diễn dưới dạng:
+\begin{multline}
+\Delta^d(x_t) = \phi_1 \Delta^d(x_{t-1}) + \phi_2 \Delta^d(x_{t-2}) + \cdots \\
++ \phi_p \Delta^d(x_{t-p}) + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+\end{multline}
+
+
+Tóm lại, ARIMA là mô hình kết hợp của quá trình tự hồi quy và trung bình trượt, sử dụng dữ liệu quá khứ để dự báo tương lai. Trước khi huấn luyện mô hình, chuỗi thời gian cần được chuyển hóa thành chuỗi dừng bằng cách lấy sai phân hoặc biến đổi logarit.
+
+\subsection{Random Forest}
+
+\subsubsection{Lý thuyết}
+
+Random Forest hoạt động như sau:
+
+\begin{itemize}
+  \item \textbf{Bootstrap Sampling:} Mỗi cây quyết định được huấn luyện trên một tập dữ liệu con được lấy mẫu từ tập dữ liệu huấn luyện ban đầu thông qua phương pháp tái chọn mẫu Bootstrap.
+  
+  \item \textbf{Random Feature Selection:} Trong quá trình xây dựng mỗi cây quyết định, chỉ một số lượng ngẫu nhiên các đặc trưng được chọn để tạo ra một cây quyết định.
+  
+  \item \textbf{Voting hoặc Average:} Kết quả dự đoán từ tất cả các cây được kết hợp lại để đưa ra dự đoán cuối cùng. Trong phân loại, phương pháp voting được sử dụng; trong dự đoán, thường là trung bình hoặc trọng số của các dự đoán từ các cây.
+\end{itemize}
+
+Random Forest là một phương pháp mạnh mẽ và linh hoạt, thường được sử dụng cho các bài toán phân loại và dự đoán với dữ liệu lớn và đa dạng.
+
+\subsubsection{Huấn luyện từng cây quyết định}
+
+Quá trình huấn luyện từng cây quyết định có thể mô tả như sau:
+
+\begin{itemize}
+  \item \textbf{Lấy mẫu dữ liệu:} Đặc trưng đầu vào $X$ và nhãn tương ứng $Y$. Lấy mẫu dữ liệu từ $X$ và $Y$ bằng phương pháp tái chọn mẫu Bootstrap.
+  
+  \item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
+\end{itemize}
+
+\section{Thực nghiệm}
 \subsection{Xây dựng mô hình}
 
 \subsubsection{RNN}
