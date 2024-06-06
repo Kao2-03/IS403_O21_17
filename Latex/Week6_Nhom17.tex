@@ -170,7 +170,30 @@ LSTM thường được sử dụng để xử lý dữ liệu chuỗi thời gi
 Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
 Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
 
-\section{Thực nghiệm}
+\subsection{GRU}
+Gated Recurrent Unit (GRU) là một biến thể của mạng neural hồi quy (RNN), được thiết kế để cải thiện khả năng lưu giữ và xử lý thông tin trong các chuỗi dữ liệu dài hạn mà không bị mất mát thông tin. GRU sử dụng các cơ chế cổng để điều chỉnh luồng thông tin vào và ra khỏi các trạng thái ẩn của mạng, giúp cập nhật trạng thái một cách chọn lọc và hiệu quả. Hai cổng chính của GRU là cổng đặt lại (reset gate) và cổng cập nhật (update gate).
+\begin{itemize}
+\item Cổng đặt lại (reset gate): Điều chỉnh mức độ thông tin từ trạng thái ẩn trước đó cần bị lãng quên.\\
+\item Cổng cập nhật (update gate): Quyết định mức độ thông tin mới từ đầu vào sẽ được sử dụng để cập nhật trạng thái ẩn.
+\end{itemize}
+GRU tính toán đầu ra dựa trên trạng thái ẩn được cập nhật qua các cổng này, giúp duy trì thông tin một cách hiệu quả trong suốt quá trình xử lý chuỗi.\\
+Dưới đây là các phương trình mô tả cách tính toán của GRU:
+\begin{itemize}
+	\item Cổng đặt lại: $r_t = \sigma(W_{xr} x_t + W_{hr} h_{t-1} + b_r)$.
+	\item Cổng cập nhật: $z_t = \sigma(W_{xz} x_t + W_{hz} h_{t-1} + b_z)$.
+	\item Trạng thái dự kiến: $\tilde{h}_t = \tanh(W_{xh} x_t + W_{hh} (r_t \odot h_{t-1}) + b_h)$.
+	\item Trạng thái ẩn cuối cùng: $h_t = z_t \odot h_{t-1} + (1 - z_t) \odot \tilde{h}_t$.
+\end{itemize}
+Trong các phương trình trên:
+\begin{itemize}
+	\item $W_{xr}, W_{xz}, W_{xh}$ là các ma trận trọng số có thể được học.
+	\item $x_t$ là đầu vào tại thời điểm $t$.
+	\item $h_{t-1}$ là trạng thái ẩn từ thời điểm trước.
+	\item $\sigma$ là hàm kích hoạt sigmoid và $\tanh$ là hàm kích hoạt hyperbolic tangent.
+	\item $b_r, b_z, b_h$ là các giá trị bias.
+\end{itemize}
+Bằng cách điều chỉnh thông tin qua các cổng, GRU có thể xử lý các chuỗi dữ liệu dài hiệu quả hơn, đặc biệt hữu ích trong các ứng dụng như dự báo giá tiền điện tử. GRU đơn giản hơn so với LSTM nhưng vẫn duy trì được khả năng mạnh mẽ trong việc xử lý các chuỗi dữ liệu phức tạp.
+\section{Thực nghiệm}gate
 
 \subsection{Xây dựng mô hình}
 
