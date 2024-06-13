@@ -12,30 +12,28 @@
 \usepackage{multicol}
 \usepackage{float}
 \usepackage{xurl} 
+\usepackage{xcolor}
+\definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 		T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 	
-	\title{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}
+	\title{\color{myorange}\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
 	\maketitle
 	
-	\begin{abstract}
-		Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.
-	\end{abstract}
+	\textbf{\color{myorange}TÓM TẮT NỘI DUNG} \> Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.
+
+	\textbf{\color{myorange}TỪ KHÓA} \> Chuỗi thời gian, phương pháp thống kê, tỷ giá trao đổi tiền điện tử, học máy, học sâu
 	
-	\begin{IEEEkeywords}
-		Chuỗi thời gian, phương pháp thống kê, tỷ giá trao đổi tiền điện tử, học máy, học sâu
-	\end{IEEEkeywords}
-	
-	\section{Giới thiệu}
+	\textbf{\color{myorange} \section{GIỚI THIỆU}}
 	Trong thời đại hiện nay, thị trường tiền điện tử đã trở thành một phần không thể thiếu của hệ thống tài chính toàn cầu, và việc theo dõi và dự báo tỷ giá trao đổi của tiền điện tử so với USD là vô cùng quan trọng. Trong phạm vi này, nhóm tập trung vào ba loại tiền điện tử phổ biến nhất: Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH).
 	
 	Nghiên cứu này sẽ sử dụng một loạt các mô hình dự báo để hiểu và dự đoán các biến động trong tỷ giá trao đổi của các loại tiền điện tử này so với USD. Cụ thể, nhóm sẽ sử dụng các mô hình hồi quy tuyến tính để phân tích các xu hướng dài hạn, và sau đó sử dụng các mạng nơ-ron như TimesNet và CNN-LSTM để khám phá mối quan hệ phức tạp giữa các yếu tố và dự báo các biến động ngắn hạn.
 	
 	Ngoài ra, nhóm cũng sẽ áp dụng các mô hình học máy như Random Forest, XGBoost, và VAR (Vector Autoregression) để đảm bảo tính linh hoạt và độ chính xác trong việc dự báo. Sự kết hợp của những mô hình này sẽ cung cấp một cái nhìn toàn diện về các xu hướng và biến động trong tỷ giá trao đổi của tiền điện tử so với USD, giúp các nhà đầu tư và chuyên gia tài chính đưa ra quyết định đầu tư thông minh và hiệu quả.
 	
-	\section{Nghiên cứu liên quan}
+	\textbf{\color{myorange} \section{NGHIÊN CỨU LIÊN QUAN}}
 	
 	Có một số nghiên cứu đã được thực hiện về chủ đề này:\par
 	Yecheng Yao và cộng sự \cite{b1} đã đề xuất một cách tiếp cận học sâu để dự đoán giá của tiền điện tử. Bài báo này tập trung vào việc sử dụng Long Short-Term Memory (LSTM) và Recurrent Neural Network (RNN) để phân tích dự báo giá của tiền điện tử. Các yếu tố được xem xét bao gồm vốn hóa thị trường, khối lượng giao dịch, nguồn cung lưu thông và nguồn cung tối đa. Tác giả cũng đề cập đến một số yếu tố như môi trường chính trị và quy định của con người.\par
@@ -47,7 +45,7 @@
 	Phumudzo Lloyd Seabe và cộng sự \cite{b7} kết luận rằng ba loại kỹ thuật học sâu - LSTM, GRU và Bi-LSTM - đã được sử dụng để dự đoán giá của ba loại tiền điện tử lớn nhất, được đo bằng vốn hóa thị trường của chúng: Bitcoin, Ethereum và Litecoin. Kết quả của nghiên cứu cho thấy rằng mô hình Bi-LSTM cung cấp các dự đoán chính xác nhất cho cả ba loại tiền tệ, tiếp theo là mô hình GRU.\par
 	Nguyen Dinh Thuan và cộng sự \cite{b8} kết luận rằng việc dự đoán giá của tiền điện tử là một công việc khó khăn, đòi hỏi nghiên cứu sâu sắc và toàn diện về thị trường tiền điện tử. Ngoài ra, nó cũng cần sự hỗ trợ của máy học và mô hình thống kê. Trong việc dự đoán giá của loại tiền này vào ngày mai. Sự kết hợp của mô hình hoặc mô hình hỗn hợp dẫn đến mô hình dự đoán với chất lượng hiệu quả hơn, như là kết quả cao hơn, tỷ lệ lỗi thấp trong chi tiết.
 	
-	\section{Tài nguyên}
+	\textbf{\color{myorange} \section{TÀI NGUYÊN}}
 	\subsection{Bộ dữ liệu}\label{AA}
 	Tập dữ liệu được sử dụng trong nghiên cứu này được thu thập từ https://www.investing.com/, một nền tảng tài chính uy tín nổi tiếng với thông tin thị trường toàn diện và cập nhật. Tập dữ liệu này bao gồm các giá trị của ba loại tiền điện tử phổ biến nhất trên thế giới: Binance Coin, Ethereum và Bitcoin so với đồng đô la Mỹ từ ngày 01/03/2019 đến ngày 01/06/2024, cung cấp một phạm vi thời gian mạnh mẽ cho phân tích của nhóm.\\
 	Mỗi mục nhập trong tập dữ liệu bao gồm các chỉ số tài chính quan trọng:\\
@@ -157,7 +155,7 @@
 	$$n \text{ is the number of observers}
 	
 	
-	\section{\textbf{Phương pháp luận}}
+	\textbf{\color{myorange} \section{PHƯƠNG PHÁP LUẬN}}
 	\subsection{RNN}
 	Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống, mọi đầu vào và đầu ra đều độc lập với nhau, không được kết nối thành một chuỗi. Tuy nhiên, điều này không phù hợp với nhiều bài toán, như việc dự đoán từ tiếp theo trong một câu, nơi cần biết thông tin về các từ trước đó. RNN được gọi là hồi quy (Recurrent) vì chúng thực hiện cùng một tác vụ cho mỗi phần tử của chuỗi, với đầu ra phụ thuộc vào cả các phép tính trước đó. Điều này cho phép RNN nhớ thông tin tính toán trước đó. Trên lý thuyết, RNN có thể sử dụng thông tin từ văn bản dài, nhưng thực tế, nó chỉ có thể nhớ một vài bước trước đó.\\
 	Cho ví dụ sau: Khi ứng dụng vào bài toán với dữ liệu là các dòng văn bản, giả sử với một câu có 5 chữ thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:\\
@@ -190,8 +188,59 @@
 	Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
 	Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
 	\subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
-	
+	ARIMA, thường được gọi là phương pháp luận Box-Jenkins, là một mô hình kết hợp tự hồi quy (AR) và trung bình trượt (MA) với quá trình tích hợp (I) để dự báo dữ liệu chuỗi thời gian. 
+	\textbf{1. Auto regression (AR):} 
+	AR là thành phần tự hồi quy sử dụng các giá trị quá khứ của chính chuỗi thời gian để dự báo giá trị hiện tại. Mô hình AR($p$) được biểu diễn như sau:
+	\begin{equation}
+		AR(p) = \phi_0 + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \cdots + \phi_p x_{t-p}
+	\end{equation}
+
+	\textbf{2. Moving Average (MA):}
+	MA là thành phần trung bình trượt, sử dụng các giá trị nhiễu trắng (white noise) quá khứ để dự báo giá trị hiện tại. Mô hình MA($q$) được biểu diễn như sau:
+	\begin{equation}
+		MA(q) = \mu + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+	\end{equation}
+
+	\textbf{3. Integrated (I):}
+	Thành phần tích hợp (I) giúp biến đổi chuỗi thời gian thành chuỗi dừng bằng cách lấy sai phân. Quá trình sai phân bậc $d$ được thực hiện như sau:
+	\begin{itemize}
+  		\item Sai phân bậc 1: $I(1) = \Delta(x_t) = x_t - x_{t-1}$
+  		\item Sai phân bậc $d$: $I(d) = \Delta^d(x_t) = \Delta(\Delta(\cdots \Delta(x_t))) \quad \text{(d lần)}$
+	\end{itemize}
+
+	Phương trình hồi quy ARIMA($p$, $d$, $q$) có thể được biểu diễn dưới dạng:
+	\begin{multline}
+		\Delta^d(x_t) = \phi_1 \Delta^d(x_{t-1}) + \phi_2 \Delta^d(x_{t-2}) + \cdots \\
+		+ \phi_p \Delta^d(x_{t-p}) + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
+	\end{multline}
+
+
+	Tóm lại, ARIMA là mô hình kết hợp của quá trình tự hồi quy và trung bình trượt, sử dụng dữ liệu quá khứ để dự báo tương lai. Trước khi huấn luyện mô hình, chuỗi thời gian cần được chuyển hóa thành chuỗi dừng bằng cách lấy sai phân hoặc biến đổi logarit.
+
 	\subsection{Random Forest}
+	\subsubsection{Lý thuyết}
+
+	Random Forest hoạt động như sau:
+
+	\begin{itemize}
+  		\item \textbf{Bootstrap Sampling:} Mỗi cây quyết định được huấn luyện trên một tập dữ liệu con được lấy mẫu từ tập dữ liệu huấn luyện ban đầu thông qua phương pháp tái chọn mẫu Bootstrap.
+  
+  		\item \textbf{Random Feature Selection:} Trong quá trình xây dựng mỗi cây quyết định, chỉ một số lượng ngẫu nhiên các đặc trưng được chọn để tạo ra một cây quyết định.
+  
+  		\item \textbf{Voting hoặc Average:} Kết quả dự đoán từ tất cả các cây được kết hợp lại để đưa ra dự đoán cuối cùng. Trong phân loại, phương pháp voting được sử dụng; trong dự đoán, thường là trung bình hoặc trọng số của các dự đoán từ các cây.
+	\end{itemize}
+
+	Random Forest là một phương pháp mạnh mẽ và linh hoạt, thường được sử dụng cho các bài toán phân loại và dự đoán với dữ liệu lớn và đa dạng.
+
+	\subsubsection{Huấn luyện từng cây quyết định}
+
+	Quá trình huấn luyện từng cây quyết định có thể mô tả như sau:
+
+	\begin{itemize}
+  		\item \textbf{Lấy mẫu dữ liệu:} Đặc trưng đầu vào $X$ và nhãn tương ứng $Y$. Lấy mẫu dữ liệu từ $X$ và $Y$ bằng phương pháp tái chọn mẫu Bootstrap.
+  
+  		\item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
+	\end{itemize}
 	
 	\subsection{LSTM}
 	
@@ -472,7 +521,375 @@
 		\label{fig:1}
 	\end{figure}
     % Hết phần của Phụng
+	\subsubsection{Arima} 
+	\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
 
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_91.png}
+    \end{minipage}
+    \caption{Dữ đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\subsubsection{Random Forest} 
+	\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_91.png}
+    \end{minipage}
+    \caption{Dữ đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 30 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 60 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
+
+	\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_73.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_82.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.15\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_91.png}
+    \end{minipage}
+    \caption{Dự đoán 90 ngày tiếp theo}
+    \label{fig:1}
+	\end{figure}
 
 	\subsection{Độ đo đánh giá}
 	\paragraph{\textbf{Tỉ lệ Train/Test 7:3}} \mbox{} \\
