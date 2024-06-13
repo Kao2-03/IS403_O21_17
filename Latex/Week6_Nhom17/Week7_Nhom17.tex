@@ -172,6 +172,27 @@
 	
 	\subsection{TimesNet}
 
+	% Phần của phụng
+    \subsection{LINEAR REGRESSION}
+    Hồi qui tuyến tính (Linear Regression) là một phương pháp dùng để tìm ra được mối quan hệ giữa một biến phụ thuộc (y) với một hoặc nhiều biến độc lập (x). Có thể nói, nó là một phương pháp dùng để dự đoán các giá trị của một biến (y) thông qua một hoặc nhiều biến khác (x) dựa trên quan hệ giữa chúng. Mô hình hồi quy tuyến tính đa biến có dạng như sau
+    
+    \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+    Trong đó:\\
+    	\indent\textbullet\ y là biến phụ thuộc.\\
+    	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) là các biến độc lập.\\
+    	\indent\textbullet\ \(\beta_0\) là hệ số chặn.\\
+    	\indent\textbullet\ \(\beta_1,..., \beta_k\) hệ số tuyến tính.\\
+    	\indent\textbullet\ \(\varepsilon\) là sai số.
+    \subsection{XGBOOST}
+    XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
+    XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
+    \textbf{Các tham số chính:}\\
+    \textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
+    \textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
+    \textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
+    \textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
+    % hết phần của phụng
+
 	\section{Thực nghiệm}
 	
 	\subsection{Xây dựng mô hình}
