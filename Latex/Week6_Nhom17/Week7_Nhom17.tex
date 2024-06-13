@@ -159,9 +159,36 @@
 	
 	\section{\textbf{Phương pháp luận}}
 	\subsection{RNN}
-	
+	Ý tưởng chính của RNN (Recurrent Neural Network) là sử dụng chuỗi các thông tin. Trong các mạng nơ-ron truyền thống, mọi đầu vào và đầu ra đều độc lập với nhau, không được kết nối thành một chuỗi. Tuy nhiên, điều này không phù hợp với nhiều bài toán, như việc dự đoán từ tiếp theo trong một câu, nơi cần biết thông tin về các từ trước đó. RNN được gọi là hồi quy (Recurrent) vì chúng thực hiện cùng một tác vụ cho mỗi phần tử của chuỗi, với đầu ra phụ thuộc vào cả các phép tính trước đó. Điều này cho phép RNN nhớ thông tin tính toán trước đó. Trên lý thuyết, RNN có thể sử dụng thông tin từ văn bản dài, nhưng thực tế, nó chỉ có thể nhớ một vài bước trước đó.\\
+	Cho ví dụ sau: Khi ứng dụng vào bài toán với dữ liệu là các dòng văn bản, giả sử với một câu có 5 chữ thì mạng nơ-ron được triển khai sẽ gồm 5 tầng nơ-ron tương ứng với mỗi chữ một tầng. Lúc đó việc tính toán bên trong RNN được thực hiện như sau:\\
+	\begin{itemize}
+		\item $x_{t}$ là đầu vào tại bước ($t$). Ví dụ, $x_{1}$ là một vec-tơ one-hot tương ứng với từ thứ 2 của câu.
+		\item $s_{t}$ là trạng thái ẩn tại bước ($t$). Đây chính là bộ nhớ của mạng. $s_{t}$ được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: $s_{t} = f(Ux_{t} + Ws_{t-1})$. Hàm ($f$) thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm $s_{-1}$, thường giá trị khởi tạo được gắn bằng 0.
+		\item $o_{t}$ là đầu ra tại bước ($t$). Ví dụ, muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì $o_{t}$ chính là một vec-tơ xác xuất các từ trong danh sách từ vựng: $o_{t} = softmax(Vs_{t})$
+	\end{itemize}
 	\subsection{CCN-LSTM}
+	Mạng CNN-LSTM là một kiến trúc mạng nơ-ron sử dụng cả Convolutional Neural Network (CNN) và Long Short-Term Memory (LSTM). Mạng này kết hợp các lợi ích của cả hai loại mạng để xử lý dữ liệu chuỗi 2D hoặc 3D như hình ảnh hoặc video.\\
+	\textbf{Convolutional Neural Network (CNN):}\\
+	CNN là một loại mạng nơ-ron mà bao gồm các tính toán convolution và được chuyên biệt hóa để xử lý dữ liệu lưới tương tự. Do tính chia sẻ trọng số và kết nối cục bộ của mạng CNN, chúng đã đóng góp đáng kể trong học sâu và được sử dụng rộng rãi trong các lĩnh vực khác nhau. Mục đích chính của mạng CNN là trích xuất thông tin đặc trưng của đầu vào, chủ yếu được thực hiện bởi lớp convolutional. Vì thông tin đặc trưng được trích xuất bởi lớp convolutional là tuyến tính, dữ liệu đầu vào thường có đặc tính phi tuyến tính. Do đó, cần phải giới thiệu một hàm phi tuyến để giải quyết vấn đề này. Hàm phi tuyến này chính là hàm kích hoạt trong mạng CNN. Trong ứng dụng cụ thể của học máy, dữ liệu đầu vào thường không phải là một mảng một chiều. Ở đây, tích chập rời rạc hai chiều được sử dụng làm ví dụ để thể hiện phép tích chập, và hàm kích hoạt sử dụng hàm Relu làm ví dụ. Phép tính cụ thể được thể hiện như sau:\\
+	$H(i,j) = (I*K)(i,j) = \sum_{m}\sum_{n} K(m,n)I(i+m, j+n)$\\
+	$f(x) = max(0,x)$\\
+	Trong công thức trên, $H(i,j)$ đại diện cho một vị trí cụ thể trên bản đồ đặc trưng sau phép tích chập. $I$ và $K(m,n)$ đại diện cho kích thước của mảng đầu vào và lõi tích chập, tương ứng. $(x)$ là bản đồ đặc trưng sau phép tích chập, thường là một tensor. Theo công thức trên, có thể thấy rằng lõi tích chập có thể trượt trên mảng đầu vào. Mỗi khi nó trượt đến một vị trí, các phần tử tương ứng của nó được nhân và tổng hợp. Cuối cùng, sau khi hoàn thành việc trượt mảng đầu vào, ma trận bản đồ đặc trưng sẽ được thu được. Mỗi phần tử trên bản đồ đặc trưng đại diện cho thông tin đặc trưng được trích xuất bởi phép tích chập. Cuối cùng, bản đồ đặc trưng được đưa vào hàm kích hoạt để mang lại tính phi tuyến, tăng cường khả năng biểu diễn của toàn bộ mạng và đóng vai trò quan trọng trong việc phù hợp dữ liệu.\\
+	\textbf{Long Short-Term Memory (LSTM):}\\
+	LSTM là một mạng nơ-ron được sử dụng để học các phụ thuộc dài hạn từ dữ liệu chuỗi thời gian. LSTM được đề xuất lần đầu vào năm 1997 và hiện nay đã có nhiều ứng dụng trong lĩnh vực dự báo chuỗi thời gian. Thực tế, LSTM là một biến thể của mạng nơ-ron hồi quy, giải quyết vấn đề độ dốc biến mất (Vấn đề xảy ra khi huấn luyện các mạng nơ ron nhiều lớp. Khi huấn luyện, giá trị đạo hàm là thông tin phản hồi của quá trình lan truyền ngược. Giá trị này trở nên vô cùng nhỏ tại các lớp nơ ron đầu tiên khiến cho việc cập nhật trọng số mạng không thể xảy ra) trong quá trình huấn luyện mạng RNN truyền thống, từ đó có thể bảo toàn thông tin dài hạn.\\
+	LSTM là một loại RNN đặc biệt. Sự khác biệt lớn nhất so với RNN truyền thống là LSTM giới thiệu khái niệm về các ô nhớ. Nhờ sự tồn tại của các ô nhớ, LSTM có khả năng ghi nhớ thông tin dài hạn trong chuỗi đầu vào. rạng thái của ô nhớ có thể truyền qua chuỗi vòng, nơi LSTM chọn cách cập nhật hoặc quên trạng thái ô nhớ thông qua các cổng khác nhau. Cụ thể, có ba loại đầu vào LSTM vào thời điểm $t$, tức là đầu vào $xt$ tại thời điểm hiện tại, trạng thái lớp ẩn $h_{t}-1$ và trạng thái ô nhớ $c_{t}-1$ tại thời điểm trước đó. Cổng quên $ft$ và cổng đầu vào $it$ được sử dụng để điều khiển thông tin nào nên được thêm vào trạng thái ô nhớ, và cổng đầu ra $it$ được sử dụng để tính toán trạng thái lớp ẩn hiện tại $ht$. Đầu ra cuối cùng của LSTM là trạng thái ô nhớ hiện tại $Ot$ và trạng thái lớp ẩn $ht$ hiện tại. Công thức của các đơn vị cổng cụ thể như sau:\\
+	\begin{itemize}
+		\item $f_{t} = \sigma(W_{f}[h_{t-1}, X_{t}] + b_{f}$
+		
+		\item $i_{t} = \sigma(W_{f}[h_{t-1}, X_{t}] + b_{f}$
+		
+		\item $o_{t} = \sigma(W_{o}[h_{t-1}, X_{t}] + b_{o}$
+	\end{itemize}
+	Trong đó $[H_{t-1}, X_{t}]$ chỉ ra rằng lớp ẩn và dữ liệu chuỗi được đồng thời đưa vào mạng. $W_{f}$, $W_{i}$, $W_{o}$ và $b_{f}$, $b_{i}$, $b_{o}$ là các tham số tương ứng trong mạng. Cụ thể,$W_{f}$, $W_{i}$, $W_{o}$ là các ma trận hệ số trọng số tương ứng cho mỗi cổng, và $b_{f}$, $b_{i}$, $b_{o}$ tương ứng với các độ lệch. $\sigma$ là hàm kích hoạt sigmoid của mỗi cổng. Quá trình cập nhật trạng thái ô nhớ diễn ra như sau:\\
 	
+	$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$\\
+	\textbf{Kết hợp CNN và LSTM:}\\
+	Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
+	Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
 	\subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
 	
 	\subsection{Random Forest}
@@ -198,9 +225,125 @@
 	\subsection{Xây dựng mô hình}
 	
 	\subsubsection{RNN}.
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BNB73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BNB82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BNB91.png}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
 	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BTC73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BTC82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_BTC91.png}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_ETH73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_ETH82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RNN_ETH91.png}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
 	\subsubsection{CNN-LSTM}.
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB91.png}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
 	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BTC73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BTC82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB91.png}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH91.png}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
 	\subsubsection{LSTM}.
 	
 	\subsubsection{VAR}.
@@ -332,7 +475,45 @@
 
 
 	\subsection{Độ đo đánh giá}
-	
+	\paragraph{\textbf{Tỉ lệ Train/Test 7:3}} \mbox{} \\
+	\begin{table}[H]
+		\centering
+		\caption{Các độ đo hiệu suất cho tỉ lệ 7:3}
+		\begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|c|}
+			\hline
+			\rowcolor{red!20} Mô hình & Độ đo & BNB & BTC & ETH \\ \hline
+			\multirow{3}{*}{Linear Regression} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{ARIMA} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{VAR} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{Random Forest} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{XGBoost} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{RNN} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{LSTM} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{GRU} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{CNN-LSTM} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+			\multirow{3}{*}{TimeNets} & MAPE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
+			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
+		\end{tabular}
+	\end{table}
 	\begin{thebibliography}{9}
 		
 		\bibitem{b1} Yecheng Yao, Jungho Yi, Shengjun Zhai, Yuwen Lin, Taekseung Kim Guihongxuan Zhang, Leonard Yoonjae Lee, “Predictive Analysis of Cryptocurrency Price Using Deep Learning”, International Journal of Engineering and Technology, Volume 7, Issue 3.27, pp. 258-264, 2018 [https://www.sciencepubco.com/index.php/ijet/article/view/17889]
