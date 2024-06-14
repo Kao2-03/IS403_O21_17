@@ -23,7 +23,7 @@
 	\maketitle
 	
 	\textbf{\color{myorange}TÓM TẮT NỘI DUNG} \> Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.
-
+	
 	\textbf{\color{myorange}TỪ KHÓA} \> Chuỗi thời gian, phương pháp thống kê, tỷ giá trao đổi tiền điện tử, học máy, học sâu
 	
 	\textbf{\color{myorange} \section{GIỚI THIỆU}}
@@ -194,81 +194,179 @@
 	\begin{equation}
 		AR(p) = \phi_0 + \phi_1 x_{t-1} + \phi_2 x_{t-2} + \cdots + \phi_p x_{t-p}
 	\end{equation}
-
+	
 	\textbf{2. Moving Average (MA):}
 	MA là thành phần trung bình trượt, sử dụng các giá trị nhiễu trắng (white noise) quá khứ để dự báo giá trị hiện tại. Mô hình MA($q$) được biểu diễn như sau:
 	\begin{equation}
 		MA(q) = \mu + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
 	\end{equation}
-
+	
 	\textbf{3. Integrated (I):}
 	Thành phần tích hợp (I) giúp biến đổi chuỗi thời gian thành chuỗi dừng bằng cách lấy sai phân. Quá trình sai phân bậc $d$ được thực hiện như sau:
 	\begin{itemize}
-  		\item Sai phân bậc 1: $I(1) = \Delta(x_t) = x_t - x_{t-1}$
-  		\item Sai phân bậc $d$: $I(d) = \Delta^d(x_t) = \Delta(\Delta(\cdots \Delta(x_t))) \quad \text{(d lần)}$
+		\item Sai phân bậc 1: $I(1) = \Delta(x_t) = x_t - x_{t-1}$
+		\item Sai phân bậc $d$: $I(d) = \Delta^d(x_t) = \Delta(\Delta(\cdots \Delta(x_t))) \quad \text{(d lần)}$
 	\end{itemize}
-
+	
 	Phương trình hồi quy ARIMA($p$, $d$, $q$) có thể được biểu diễn dưới dạng:
 	\begin{multline}
 		\Delta^d(x_t) = \phi_1 \Delta^d(x_{t-1}) + \phi_2 \Delta^d(x_{t-2}) + \cdots \\
 		+ \phi_p \Delta^d(x_{t-p}) + \theta_1 \epsilon_{t-1} + \theta_2 \epsilon_{t-2} + \cdots + \theta_q \epsilon_{t-q}
 	\end{multline}
-
-
+	
+	
 	Tóm lại, ARIMA là mô hình kết hợp của quá trình tự hồi quy và trung bình trượt, sử dụng dữ liệu quá khứ để dự báo tương lai. Trước khi huấn luyện mô hình, chuỗi thời gian cần được chuyển hóa thành chuỗi dừng bằng cách lấy sai phân hoặc biến đổi logarit.
-
+	
 	\subsection{Random Forest}
 	\subsubsection{Lý thuyết}
-
+	
 	Random Forest hoạt động như sau:
-
+	
 	\begin{itemize}
-  		\item \textbf{Bootstrap Sampling:} Mỗi cây quyết định được huấn luyện trên một tập dữ liệu con được lấy mẫu từ tập dữ liệu huấn luyện ban đầu thông qua phương pháp tái chọn mẫu Bootstrap.
-  
-  		\item \textbf{Random Feature Selection:} Trong quá trình xây dựng mỗi cây quyết định, chỉ một số lượng ngẫu nhiên các đặc trưng được chọn để tạo ra một cây quyết định.
-  
-  		\item \textbf{Voting hoặc Average:} Kết quả dự đoán từ tất cả các cây được kết hợp lại để đưa ra dự đoán cuối cùng. Trong phân loại, phương pháp voting được sử dụng; trong dự đoán, thường là trung bình hoặc trọng số của các dự đoán từ các cây.
+		\item \textbf{Bootstrap Sampling:} Mỗi cây quyết định được huấn luyện trên một tập dữ liệu con được lấy mẫu từ tập dữ liệu huấn luyện ban đầu thông qua phương pháp tái chọn mẫu Bootstrap.
+		
+		\item \textbf{Random Feature Selection:} Trong quá trình xây dựng mỗi cây quyết định, chỉ một số lượng ngẫu nhiên các đặc trưng được chọn để tạo ra một cây quyết định.
+		
+		\item \textbf{Voting hoặc Average:} Kết quả dự đoán từ tất cả các cây được kết hợp lại để đưa ra dự đoán cuối cùng. Trong phân loại, phương pháp voting được sử dụng; trong dự đoán, thường là trung bình hoặc trọng số của các dự đoán từ các cây.
 	\end{itemize}
-
+	
 	Random Forest là một phương pháp mạnh mẽ và linh hoạt, thường được sử dụng cho các bài toán phân loại và dự đoán với dữ liệu lớn và đa dạng.
-
+	
 	\subsubsection{Huấn luyện từng cây quyết định}
-
+	
 	Quá trình huấn luyện từng cây quyết định có thể mô tả như sau:
-
+	
 	\begin{itemize}
-  		\item \textbf{Lấy mẫu dữ liệu:} Đặc trưng đầu vào $X$ và nhãn tương ứng $Y$. Lấy mẫu dữ liệu từ $X$ và $Y$ bằng phương pháp tái chọn mẫu Bootstrap.
-  
-  		\item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
+		\item \textbf{Lấy mẫu dữ liệu:} Đặc trưng đầu vào $X$ và nhãn tương ứng $Y$. Lấy mẫu dữ liệu từ $X$ và $Y$ bằng phương pháp tái chọn mẫu Bootstrap.
+		
+		\item \textbf{Xây dựng cây quyết định:} Xây dựng một cây quyết định trên tập dữ liệu con này.
 	\end{itemize}
 	
 	\subsection{LSTM}
+	LSTMs (Long Short-Term Memory) là một loại kiến trúc đặc biệt của mạng nơ-ron hồi quy (RNN) được thiết kế để giải quyết một thách thức cụ thể—nhớ thông tin trong thời gian dài. Các mô hình này tăng cường khả năng ghi nhớ của các mạng nơ-ron hồi quy. Trong khi các mạng RNN thường chỉ giữ được bộ nhớ ngắn hạn, sử dụng thông tin trước đó cho các nhiệm vụ ngay lập tức trong mạng nơ-ron hiện tại, LSTMs được sử dụng rộng rãi trong các mạng nơ-ron dựa trên RNNs. Hiệu quả của LSTMs trải rộng qua nhiều vấn đề mô hình hóa chuỗi trong nhiều lĩnh vực ứng dụng khác nhau, bao gồm video, xử lý ngôn ngữ tự nhiên (NLP), dữ liệu địa không gian, và phân tích chuỗi thời gian.
+	\textbf{Vấn Đề Tiêu Biểu của RNNs và Giải Pháp:}\\
+	Một vấn đề đáng kể với RNNs là hiện tượng gradient biến mất. Vấn đề này phát sinh do việc sử dụng lại các tham số giống nhau trong các khối RNN ở mỗi bước. Để giải quyết vấn đề này, chúng ta cần cố gắng giới thiệu các tham số thay đổi ở mỗi bước thời gian.
+	\textbf{Tìm Kiếm Sự Cân Bằng:}\\
+	Tìm kiếm sự cân bằng trong các tình huống như vậy là rất quan trọng. Chúng ta cần kết hợp các tham số mới ở mỗi bước đồng thời tổng quát hóa các chuỗi có độ dài biến đổi và duy trì số lượng tham số có thể học được không đổi. Điều này dẫn đến việc giới thiệu các tế bào RNN có cổng, chẳng hạn như LSTM và GRU (Gated Recurrent Unit).
+	
+	LSTMs và GRUs là những tế bào có cổng trong mạng RNN, giúp giải quyết vấn đề gradient biến mất và cải thiện khả năng ghi nhớ trong thời gian dài, qua đó nâng cao hiệu quả của các ứng dụng như xử lý ngôn ngữ tự nhiên, phân tích video, và dữ liệu địa không gian.
+	\section*{Mô hình Long Short-Term Memory (LSTM)}
+	
+	Mỗi tế bào LSTM bao gồm ba cổng: cổng quên (forget gate), cổng nhập (input gate), và cổng đầu ra (output gate). Các công thức dưới đây diễn tả cách các cổng này hoạt động.
+	
+	1. **Cổng quên (Forget gate):**
+	
+	\[
+	f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+	\]
+	
+	2. **Cổng nhập (Input gate):**
+	
+	\[
+	i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+	\]
+	
+	3. **Vector thông tin mới (Candidate memory cell):**
+	
+	\[
+	\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+	\]
+	
+	4. **Trạng thái nhớ (Memory cell state):**
+	
+	\[
+	C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+	\]
+	
+	5. **Cổng đầu ra (Output gate):**
+	
+	\[
+	o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+	\]
+	
+	6. **Trạng thái ẩn (Hidden state):**
+	
+	\[
+	h_t = o_t * \tanh(C_t)
+	\]
+	
+	Trong đó:
+	\begin{itemize}
+		\item \( x_t \) là đầu vào tại thời điểm \( t \).
+		\item \( h_{t-1} \) là trạng thái ẩn từ thời điểm trước đó \( t-1 \).
+		\item \( \sigma \) là hàm kích hoạt sigmoid.
+		\item \( \tanh \) là hàm kích hoạt hyperbolic tangent.
+		\item \( W_f, W_i, W_C, W_o \) là các ma trận trọng số cho các cổng tương ứng.
+		\item \( b_f, b_i, b_C, b_o \) là các vector bias cho các cổng tương ứng.
+		\item \( f_t, i_t, o_t \) là các vector cổng quên, cổng nhập, và cổng đầu ra tại thời điểm \( t \).
+		\item \( \tilde{C}_t \) là vector thông tin mới tại thời điểm \( t \).
+		\item \( C_t \) là trạng thái nhớ tại thời điểm \( t \).
+	\end{itemize}
+	\subsection{VAR}
+	Vector autoregression (VAR) là một mô hình thống kê được sử dụng để nắm bắt mối quan hệ giữa nhiều đại lượng khi chúng thay đổi theo thời gian. VAR là một loại mô hình quá trình ngẫu nhiên. Các mô hình VAR mở rộng mô hình tự hồi quy đơn biến (univariate autoregressive model) bằng cách cho phép phân tích các chuỗi thời gian đa biến. VAR thường được sử dụng trong kinh tế học và các khoa học tự nhiên.
+	\textbf{Cấu Trúc và Hoạt Động của Mô Hình VAR:}\\
+	Giống như mô hình tự hồi quy, mỗi biến trong mô hình VAR có một phương trình mô tả sự tiến triển của nó theo thời gian. Phương trình này bao gồm các giá trị trễ (giá trị trong quá khứ) của biến đó, các giá trị trễ của các biến khác trong mô hình và một hạng tử sai số (error term).
+	
+	Cụ thể:
+	-Giá trị trễ của biến: Những giá trị trong quá khứ của biến đó.
+	-Giá trị trễ của các biến khác: Những giá trị trong quá khứ của các biến khác trong mô hình.
+	-Hạng tử sai số: Biểu diễn những yếu tố ngẫu nhiên hoặc không thể đoán trước được ảnh hưởng đến biến đó.
+	
+	
+	
+	\section*{Mô hình Vector Autoregression (VAR)}
+	
+	Mô hình VAR có thể được viết dưới dạng ma trận như sau:
+	
+	\[
+	\mathbf{y}_t = \mathbf{A}_1 \mathbf{y}_{t-1} + \mathbf{A}_2 \mathbf{y}_{t-2} + \cdots + \mathbf{A}_p \mathbf{y}_{t-p} + \mathbf{u}_t
+	\]
+	
+	Trong đó:
+	\begin{itemize}
+		\item \(\mathbf{y}_t\) là vector cột \( k \times 1 \) của các biến tại thời điểm \( t \).
+		\item \(\mathbf{A}_i\) là các ma trận hệ số \( k \times k \) cho từng độ trễ \( i \) từ 1 đến \( p \).
+		\item \(\mathbf{u}_t\) là vector cột \( k \times 1 \) của các hạng tử sai số (error terms) tại thời điểm \( t \).
+	\end{itemize}
+	
+	Công thức chi tiết của một phương trình trong mô hình VAR cho biến thứ \( i \) sẽ là:
+	
+	\[
+	y_{it} = \alpha_{i0} + \sum_{j=1}^{k} \sum_{l=1}^{p} \alpha_{ij}^{(l)} y_{jt-l} + u_{it}
+	\]
+	
+	Trong đó:
+	\begin{itemize}
+		\item \(\alpha_{i0}\) là hằng số (constant term) của phương trình cho biến \( y_{it} \).
+		\item \(\alpha_{ij}^{(l)}\) là hệ số cho biến \( y_{jt-l} \) trong phương trình của \( y_{it} \) với độ trễ \( l \).
+		\item \( y_{jt-l} \) là giá trị của biến \( y_j \) tại thời điểm \( t-l \).
+	\end{itemize}
 	
 	\subsection{GRU}
 	
 	\subsection{TimesNet}
-
+	
 	% Phần của phụng
-    \subsection{LINEAR REGRESSION}
-    Hồi qui tuyến tính (Linear Regression) là một phương pháp dùng để tìm ra được mối quan hệ giữa một biến phụ thuộc (y) với một hoặc nhiều biến độc lập (x). Có thể nói, nó là một phương pháp dùng để dự đoán các giá trị của một biến (y) thông qua một hoặc nhiều biến khác (x) dựa trên quan hệ giữa chúng. Mô hình hồi quy tuyến tính đa biến có dạng như sau
-    
-    \[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
-    Trong đó:\\
-    	\indent\textbullet\ y là biến phụ thuộc.\\
-    	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) là các biến độc lập.\\
-    	\indent\textbullet\ \(\beta_0\) là hệ số chặn.\\
-    	\indent\textbullet\ \(\beta_1,..., \beta_k\) hệ số tuyến tính.\\
-    	\indent\textbullet\ \(\varepsilon\) là sai số.
-    \subsection{XGBOOST}
-    XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
-    XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
-    \textbf{Các tham số chính:}\\
-    \textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
-    \textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
-    \textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
-    \textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
-    % hết phần của phụng
-
+	\subsection{LINEAR REGRESSION}
+	Hồi qui tuyến tính (Linear Regression) là một phương pháp dùng để tìm ra được mối quan hệ giữa một biến phụ thuộc (y) với một hoặc nhiều biến độc lập (x). Có thể nói, nó là một phương pháp dùng để dự đoán các giá trị của một biến (y) thông qua một hoặc nhiều biến khác (x) dựa trên quan hệ giữa chúng. Mô hình hồi quy tuyến tính đa biến có dạng như sau
+	
+	\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon\]
+	Trong đó:\\
+	\indent\textbullet\ y là biến phụ thuộc.\\
+	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) là các biến độc lập.\\
+	\indent\textbullet\ \(\beta_0\) là hệ số chặn.\\
+	\indent\textbullet\ \(\beta_1,..., \beta_k\) hệ số tuyến tính.\\
+	\indent\textbullet\ \(\varepsilon\) là sai số.
+	\subsection{XGBOOST}
+	XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
+	XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
+	\textbf{Các tham số chính:}\\
+	\textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
+	\textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
+	\textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
+	\textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.\\
+	% hết phần của phụng
+	
 	\section{Thực nghiệm}
 	
 	\subsection{Xây dựng mô hình}
@@ -394,33 +492,151 @@
 		\label{fig:1}
 	\end{figure}
 	\subsubsection{LSTM}.
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB_LSTM.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/LSTM_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB_LSTM.jpg}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/LSTM_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BTC_LSTM.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/LSTM_I.jpg}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH_LSTM.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/LSTM_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH_LSTM.jpg}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
 	
 	\subsubsection{VAR}.
-
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/VAR_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB_VAR.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/VAR_I.jpg}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BTC_VAR.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/VAR_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/BNB_VAR.jpg}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH_VAR.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/VAR_I.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ETH_VAR.jpg}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
+	
 	\subsubsection{GRU}.
 	
 	% phần của Phụng
 	\subsubsection{LINEAR REGRESSION}.
-    \begin{figure}[H]
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
 			\centering
-			\begin{minipage}{0.15\textwidth}
-				\centering
-				\includegraphics[width=1\textwidth]{Figure/LN_BNB_73.png}
-			\end{minipage}
-			\hfill
-			\begin{minipage}{0.15\textwidth}
-				\centering
-				\includegraphics[width=1\textwidth]{Figure/LN_BNB_82.png}
-			\end{minipage}
-			\hfill
-			\begin{minipage}{0.15\textwidth}
-				\centering
+			\includegraphics[width=1\textwidth]{Figure/LN_BNB_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/LN_BNB_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
 			\includegraphics[width=1\textwidth]{Figure/LN_BNB_91.png}
-			\end{minipage}
-			\caption{Dữ liệu BNB-USD}
-			\label{fig:1}
-		\end{figure}
-		\begin{figure}[H]
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.15\textwidth}
 			\centering
@@ -459,29 +675,29 @@
 		\caption{Dữ liệu ETH-USD}
 		\label{fig:1}
 	\end{figure}
- 
-    % phần của Phụng
+	
+	% phần của Phụng
 	\subsubsection{XGBOOST}.
-    \begin{figure}[H]
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
 			\centering
-			\begin{minipage}{0.15\textwidth}
-				\centering
-				\includegraphics[width=1\textwidth]{Figure/XGB_BNB_73.png}
-			\end{minipage}
-			\hfill
-			\begin{minipage}{0.15\textwidth}
-				\centering
-				\includegraphics[width=1\textwidth]{Figure/XGB_BNB_82.png}
-			\end{minipage}
-			\hfill
-			\begin{minipage}{0.15\textwidth}
-				\centering
+			\includegraphics[width=1\textwidth]{Figure/XGB_BNB_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/XGB_BNB_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
 			\includegraphics[width=1\textwidth]{Figure/XGB_BNB_91.png}
-			\end{minipage}
-			\caption{Dữ liệu BNB-USD}
-			\label{fig:1}
-		\end{figure}
-		\begin{figure}[H]
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.15\textwidth}
 			\centering
@@ -520,377 +736,377 @@
 		\caption{Dữ liệu ETH-USD}
 		\label{fig:1}
 	\end{figure}
-    % Hết phần của Phụng
+	% Hết phần của Phụng
 	\subsubsection{Arima} 
 	\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_91.png}
-    \end{minipage}
-    \caption{Dữ đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_91.png}
+		\end{minipage}
+		\caption{Dữ đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\subsubsection{Random Forest} 
 	\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_91.png}
-    \end{minipage}
-    \caption{Dữ đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_91.png}
+		\end{minipage}
+		\caption{Dữ đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 30 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 60 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_91.png}
+		\end{minipage}
+		\caption{Dự đoán 90 ngày tiếp theo}
+		\label{fig:1}
 	\end{figure}
-
+	
 	\subsection{Độ đo đánh giá}
 	\paragraph{\textbf{Tỉ lệ Train/Test 7:3}} \mbox{} \\
 	\begin{table}[H]
@@ -943,5 +1159,5 @@
 		\bibitem{b8} Nguyen Dinh Thuan, Nguyen Minh Nhut, Hoang Tung, Vu Minh Sang, “PREDICTING THE CLOSING PRICE OF CRYPTOCURRENCY USING HYBRID ARIMA, REGRESSION AND MACHINE LEARNING”, Ky yeu Hoi nghi KHCN Quoc gia lan thu XIV ve Nghien cuu co ban va ung dung Cong nghe thong tin (FAIR), TP. HCM, ngay 23-24/12/2021
 		
 	\end{thebibliography}
-
+	
 \end{document}
