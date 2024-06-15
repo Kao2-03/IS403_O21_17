@@ -343,9 +343,75 @@
 	\end{itemize}
 	
 	\subsection{GRU}
+	Gated Recurrent Unit (GRU) là một biến thể của mạng neural hồi quy (RNN), được thiết kế để cải thiện khả năng lưu giữ và xử lý thông tin trong các chuỗi dữ liệu dài hạn mà không bị mất mát thông tin. GRU sử dụng các cơ chế cổng để điều chỉnh luồng thông tin vào và ra khỏi các trạng thái ẩn của mạng, giúp cập nhật trạng thái một cách chọn lọc và hiệu quả. Hai cổng chính của GRU là cổng đặt lại (reset gate) và cổng cập nhật (update gate).
+	\begin{itemize}
+		\item Cổng đặt lại (reset gate): Điều chỉnh mức độ thông tin từ trạng thái ẩn trước đó cần bị lãng quên.\\
+		\item Cổng cập nhật (update gate): Quyết định mức độ thông tin mới từ đầu vào sẽ được sử dụng để cập nhật trạng thái ẩn.
+	\end{itemize}
+	GRU tính toán đầu ra dựa trên trạng thái ẩn được cập nhật qua các cổng này, giúp duy trì thông tin một cách hiệu quả trong suốt quá trình xử lý chuỗi.\\
+	Dưới đây là các phương trình mô tả cách tính toán của GRU:
+	\begin{itemize}
+		\item Cổng đặt lại: 
+		\begin{equation}
+			r_t = \sigma(W_{xr} x_t + W_{hr} h_{t-1} + b_r)
+		\end{equation}
+		\item Cổng cập nhật: 
+		\begin{equation}
+			z_t = \sigma(W_{xz} x_t + W_{hz} h_{t-1} + b_z)
+		\end{equation}
+		\item Trạng thái dự kiến: 
+		\begin{equation}
+			\tilde{h}_t = \tanh(W_{xh} x_t + W_{hh} (r_t \odot h_{t-1}) + b_h)
+		\end{equation}
+		\item Trạng thái ẩn cuối cùng:
+		\begin{equation}
+			h_t = z_t \odot h_{t-1} + (1 - z_t) \odot \tilde{h}_t
+		\end{equation}
+	\end{itemize}
+	Trong các phương trình trên:
+	\begin{itemize}
+		\item $W_{xr}, W_{xz}, W_{xh}$ là các ma trận trọng số có thể được học.
+		\item $x_t$ là đầu vào tại thời điểm $t$.
+		\item $h_{t-1}$ là trạng thái ẩn từ thời điểm trước.
+		\item $\sigma$ là hàm kích hoạt sigmoid và $\tanh$ là hàm kích hoạt hyperbolic tangent.
+		\item $b_r, b_z, b_h$ là các giá trị bias.
+	\end{itemize}
+	Bằng cách điều chỉnh thông tin qua các cổng, GRU có thể xử lý các chuỗi dữ liệu dài hiệu quả hơn, đặc biệt hữu ích trong các ứng dụng như dự báo giá tiền điện tử. GRU đơn giản hơn so với LSTM nhưng vẫn duy trì được khả năng mạnh mẽ trong việc xử lý các chuỗi dữ liệu phức tạp.
 	
 	\subsection{TimesNet}
-	
+	TimesNet là một mô hình hiện đại cho dự báo chuỗi thời gian, tận dụng kiến trúc đặc biệt để học và nắm bắt các mô hình thời gian phức tạp và đa dạng. Nó được thiết kế để cải thiện hiệu quả so với các phương pháp truyền thống bằng cách sử dụng cơ chế mạng lưới đặc trưng thời gian (Time-Series Network) và đặc biệt nhắm đến các đặc điểm độc đáo của dữ liệu chuỗi thời gian. TimesNet xây dựng các mạng con đặc trưng thời gian bằng cách:
+	\begin{itemize}
+		\item Bộ Biểu Diễn Thời Gian: Sử dụng các kiến trúc convolution và attention đặc trưng thời gian để học và tách các mẫu từ dữ liệu chuỗi thời gian. Bộ biểu diễn này được thiết kế để phát hiện và tổng hợp các đặc trưng từ cả thành phần tuần hoàn (như mùa) và phi tuần hoàn (như xu hướng ngắn hạn).
+		\item Biểu Diễn Khối và Nối Kết: Các biểu diễn thời gian được tổ chức thành các khối và được nối kết để duy trì thông tin thời gian trong quá trình huấn luyện và dự báo.
+	\end{itemize}
+	TimeBlock là một thành phần quan trọng trong kiến trúc của TimesNet, được sử dụng để xử lý và trích xuất các đặc trưng từ dữ liệu chuỗi thời gian. TimeBlock kết hợp các phương pháp convolutional và attention để phân tích dữ liệu thời gian theo các khía cạnh khác nhau và tạo ra các biểu diễn đặc trưng cho mô hình dự báo.
+	Mỗi TimeBlock thường bao gồm một chuỗi các lớp convolutional và attention, cùng với các kết nối và kết hợp đặc trưng để duy trì thông tin thời gian trong quá trình huấn luyện và dự báo. 
+	\begin{itemize}
+		\item Convolution và Attention Thời Gian: Sử dụng convolution để khai thác các đặc trưng ngắn hạn và attention để phát hiện các mẫu quan trọng trong chuỗi dữ liệu dài hạn.
+		\item Cơ Chế Tập Trung (Attention): Tăng cường khả năng của mô hình trong việc tập trung vào các thành phần quan trọng của dữ liệu thời gian, điều chỉnh sự chú ý đến các điểm dữ liệu có ảnh hưởng lớn đến dự báo.
+		\item Tích Hợp Đa Chiều: Tích hợp thông tin từ nhiều chiều dữ liệu, đảm bảo rằng tất cả các khía cạnh của dữ liệu chuỗi thời gian được xem xét trong dự báo.
+	\end{itemize}
+	TimesNet có thể được mô tả bằng một tập hợp các công thức toán học, bao gồm:
+	\begin{itemize}
+		\item Khối Convolution:
+		\begin{equation}
+			\mathbf{F}^{(l)} = \text{Conv1D}(\mathbf{F}^{(l-1)}, \mathbf{W}^{(l)}) + \mathbf{b}^{(l)}
+		\end{equation}
+		Trong đó, $\mathbf{F}^{(l)}$ là đặc trưng tại lớp $l$, $\text{Conv1D}$ là phép tích chập 1 chiều, $\mathbf{W}^{(l)}$ là trọng số của lớp $l$, và $\mathbf{b}^{(l)}$ là vector bù.
+		\item Khối Attention:
+		\begin{equation}
+			\mathbf{Z}^{(l)} = \text{Attention}(\mathbf{Q}^{(l)}, \mathbf{K}^{(l)}, \mathbf{V}^{(l)})
+		\end{equation}
+		Trong đó, $\mathbf{Q}^{(l)}$, $\mathbf{K}^{(l)}$, $\mathbf{V}^{(l)}$ là các ma trận query, key, và value tại lớp $l$.
+		\item Kết Hợp Đặc Trưng:
+		\begin{equation}
+			\mathbf{F}_{\text{out}} = \text{Concat}(\mathbf{F}_{\text{conv}}, \mathbf{Z}_{\text{attn}})
+		\end{equation}
+		Trong đó, $\mathbf{F}_{\text{conv}}$ và $\mathbf{Z}_{\text{attn}}$ là các đặc trưng từ các khối convolution và attention.
+	\end{itemize}
+	TimesNet có khả năng được tùy chỉnh cho nhiều loại dữ liệu chuỗi thời gian khác nhau.
+	Thông qua việc sử dụng TimeBlock, TimesNet có khả năng học và nắm bắt các mô hình thời gian phức tạp và đa dạng, thình thích nghi tốt với các đặc điểm cụ thể của từng tập dữ liệut, từ các mẫu ngắn hạn đến các xu hướng dài hạn trong dữ liệu chuỗi thời gian.
+
 	% Phần của phụng
 	\subsection{LINEAR REGRESSION}
 	Hồi qui tuyến tính (Linear Regression) là một phương pháp dùng để tìm ra được mối quan hệ giữa một biến phụ thuộc (y) với một hoặc nhiều biến độc lập (x). Có thể nói, nó là một phương pháp dùng để dự đoán các giá trị của một biến (y) thông qua một hoặc nhiều biến khác (x) dựa trên quan hệ giữa chúng. Mô hình hồi quy tuyến tính đa biến có dạng như sau
@@ -614,7 +680,125 @@
 	\end{figure}
 	
 	\subsubsection{GRU}.
+		\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BNB_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BNB_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BNB_91.png}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BTC_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BTC_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_BTC_91.png}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
 	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_ETH_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_ETH_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/GRU_ETH_91.png}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\subsubsection{TimesNet}.
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BNB_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BNB_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BNB_91.png}
+		\end{minipage}
+		\caption{Dữ liệu BNB-USD}
+		\label{fig:1}
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BTC_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BTC_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_BTC_91.png}
+		\end{minipage}
+		\caption{Dữ liệu BTC-USD}
+		\label{fig:1}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_ETH_73.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_ETH_82.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.15\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{Figure/TimesNet_ETH_91.png}
+		\end{minipage}
+		\caption{Dữ liệu ETH-USD}
+		\label{fig:1}
+	\end{figure}
+
 	% phần của Phụng
 	\subsubsection{LINEAR REGRESSION}.
 	\begin{figure}[H]
