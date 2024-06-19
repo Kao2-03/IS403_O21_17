@@ -20,6 +20,12 @@
 \begin{document}
 	
 	\title{\color{myorange}\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
+	\author{\IEEEauthorblockN{\footnotesize{1. Lê Ngọc Yến Khoa, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522224@gm.uit.edu.vn}}
+		\IEEEauthorblockN{\footnotesize{2. Nguyễn Hữu Phụng, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522481@gm.uit.edu.vn}}
+		\IEEEauthorblockN{\footnotesize{3. Trần Minh Quang, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522519@gm.uit.edu.vn}}
+		\IEEEauthorblockN{\footnotesize{4. Đặng Lưu Hà, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21520798@gm.uit.edu.vn}}
+		\IEEEauthorblockN{\footnotesize{5. Đoàn Thị Mỹ Linh, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522285@gm.uit.edu.vn}}
+	}
 	\maketitle
 	
 	\textbf{\color{myorange}TÓM TẮT NỘI DUNG} \> Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.
@@ -1292,45 +1298,125 @@
 	\end{figure}
 	
 	\subsection{Độ đo đánh giá}
-	\paragraph{\textbf{Tỉ lệ Train/Test 7:3}} \mbox{} \\
-	\begin{table}[H]
-		\centering
-		\caption{Các độ đo hiệu suất cho tỉ lệ 7:3}
-		\begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|c|}
-			\hline
-			\rowcolor{red!20} Mô hình & Độ đo & BNB & BTC & ETH \\ \hline
-			\multirow{3}{*}{Linear Regression} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{ARIMA} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{VAR} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{Random Forest} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{XGBoost} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{RNN} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{LSTM} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{GRU} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{CNN-LSTM} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-			\multirow{3}{*}{TimeNets} & MAPE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & RMSE & Giá trị & Giá trị & Giá trị \\
-			\cline{2-5} & MSE & Giá trị & Giá trị & Giá trị \\ \hline
-		\end{tabular}
-	\end{table}
+\paragraph{\textbf{Bộ dữ liệu BNB-USD}} \mbox{} \\
+\begin{table}[H]
+	\centering
+	\caption{Đánh giá hiệu suất với bộ dữ liệu BNB-USD}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
+		Linear & 7:3 & -- & -- & -- \\
+		Regression & 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		VAR & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		XGBoost & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		RNN & 7:3 & 350.74 & 76701.48 & 123020.43 \\
+		& 8:2 & 382.16 & 79087.01 & 146044.46 \\
+		& 9:1 & 563.61 & 67427.89 & 317665.21 \\ \hline
+		LSTM & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		GRU & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		CNN-LSTM & 7:3 & 346.1 & 76083.87 & 119787.03 \\
+		& 8:2 & 367.89 & 76557.03 & 135348.87 \\
+		& 9:1 & 550.08 & 65791.1 & 302594.84 \\ \hline
+		TimeNets & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+	\end{tabular}
+\end{table}
+
+\paragraph{\textbf{Bộ dữ liệu BTC-USD}} \mbox{} \\
+\begin{table}[H]
+	\centering
+	\caption{Đánh giá hiệu suất với bộ dữ liệu BTC-USD}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
+		Linear & 7:3 & -- & -- & -- \\
+		Regression & 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		VAR & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		XGBoost & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		RNN & 7:3 & 42328.2 & 9074384.01 & 1791683934.05 \\
+		& 8:2 & 48788.45 & 8586283.58 & 2380313534.59 \\
+		& 9:1 & 65797.34 & 7301629.13 & 4329290426.69 \\ \hline
+		LSTM & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		GRU & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		CNN-LSTM & 7:3 & 41552.4 & 8970583.8 & 1726602440.11 \\
+		& 8:2 & 47812.57 & 8460484.14 & 2286042372.94 \\
+		& 9:1 & 64470.80 & 7158742.60 & 4156484965.34 \\ \hline
+		TimeNets & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+	\end{tabular}
+\end{table}
+\paragraph{\textbf{Bộ dữ liệu ETH-USD}} \mbox{} \\
+\begin{table}[H]
+	\centering
+	\caption{Đánh giá hiệu suất với bộ dữ liệu ETH-USD}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
+		Linear & 7:3 & -- & -- & -- \\
+		Regression & 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		VAR & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		XGBoost & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		RNN & 7:3 & 2311.58 & 533999.73 & 5343409.57 \\
+		& 8:2 & 2653.59 & 547630.29 & 7041548.95 \\
+		& 9:1 & 3397.91 & 488861.25 & 11545854.39 \\ \hline
+		LSTM & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		GRU & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+		CNN-LSTM & 7:3 & 2245.32 & 517441.26 & 5041478.61 \\
+		& 8:2 & 2638.19 & 544521.04 & 6960066.29 \\
+		& 9:1 & 3335.64 & 479734.57 & 11126520.7 \\ \hline
+		TimeNets & 7:3 & -- & -- & -- \\
+		& 8:2 & -- & -- & -- \\
+		& 9:1 & -- & -- & -- \\ \hline
+	\end{tabular}
+\end{table}
+\textbf{\color{myorange} \section{TỔNG KẾT}}
 	\begin{thebibliography}{9}
 		
 		\bibitem{b1} Yecheng Yao, Jungho Yi, Shengjun Zhai, Yuwen Lin, Taekseung Kim Guihongxuan Zhang, Leonard Yoonjae Lee, “Predictive Analysis of Cryptocurrency Price Using Deep Learning”, International Journal of Engineering and Technology, Volume 7, Issue 3.27, pp. 258-264, 2018 [https://www.sciencepubco.com/index.php/ijet/article/view/17889]
