@@ -6,17 +6,21 @@
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
-\usepackage[utf8]{vietnam}
+\usepackage[utf8]{vietnam} % Ensure your editor supports UTF-8 for Vietnamese
 \usepackage[table]{xcolor}
 \usepackage{multirow}
 \usepackage{multicol}
-\usepackage{float}
-\usepackage{xurl} 
-\usepackage{xcolor}
+\usepackage{float} % Only load float once
+\usepackage{xurl}
+\usepackage{adjustbox}
+\usepackage{placeins}
+\usepackage{fancyhdr} % For custom headers and footers
 \definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
 
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-		T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+% Define pagestyle
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+\fancyfoot[R]{\thepage} % Page number on the right footer
 \begin{document}
 	
 	\title{\color{myorange}\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
@@ -193,7 +197,7 @@
 	\textbf{Kết hợp CNN và LSTM:}\\
 	Mạng CNN-LSTM kết hợp CNN để trích xuất đặc trưng không gian từ dữ liệu (ví dụ: các khối hình ảnh) và LSTM để hiểu mối quan hệ thời gian trong dữ liệu (ví dụ: chuỗi hình ảnh). Quá trình này cho phép mô hình hiểu được cả cấu trúc không gian và thời gian của dữ liệu, phù hợp cho nhiều ứng dụng như nhận dạng hình ảnh/video và dự báo chuỗi thời gian.\\
 	Mạng CNN-LSTM thường được sử dụng trong các lĩnh vực như xử lý hình ảnh/video, nhận dạng cử chỉ, dự báo thời tiết, dự báo chuỗi thời gian trong tài chính, và nhiều ứng dụng khác liên quan đến dữ liệu có cấu trúc không gian và thời gian.
-	\subsection{ARIMA - autoregressive integrated moving average (THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
+	\subsection{ARIMA(THUẬT TOÁN TRUNG BÌNH TRƯỢT KẾT HỢP TỰ HỒI QUY)}
 	ARIMA, thường được gọi là phương pháp luận Box-Jenkins, là một mô hình kết hợp tự hồi quy (AR) và trung bình trượt (MA) với quá trình tích hợp (I) để dự báo dữ liệu chuỗi thời gian. 
 	\textbf{1. Auto regression (AR):} 
 	AR là thành phần tự hồi quy sử dụng các giá trị quá khứ của chính chuỗi thời gian để dự báo giá trị hiện tại. Mô hình AR($p$) được biểu diễn như sau:
@@ -1308,15 +1312,15 @@
 		Linear & 7:3 & -- & -- & -- \\
 		Regression & 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		ARIMA & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & 116.79& 0.26 & 13640.51 \\
+		& 8:2 & 141.78 & 0.30 & 20101.88 \\
+		& 9:1 & 242.45 & 0.38 & 58784.06 \\ \hline
 		VAR & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		Random Forest & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & 13.09 & 0.02 & 171.54 \\
+		& 8:2 & 13.58 & 0.02 & 184.68 \\
+		& 9:1 & 17.76 & 0.03 & 315.41 \\ \hline
 		XGBoost & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
@@ -1348,15 +1352,15 @@
 		Linear & 7:3 & -- & -- & -- \\
 		Regression & 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		ARIMA & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & 22110.64 & 0.37 & 488880227.03 \\
+		& 8:2 & 21697.67 & 0.28 & 470789191.01 \\
+		& 9:1 & 21126.95 & 0.28 & 446348255.48 \\ \hline
 		VAR & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		Random Forest & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & 2094.6129 & 0.0421 & 4387403.2687 \\
+		& 8:2 & 2223.77 & 0.03 & 4945188.59 \\
+		& 9:1 & 3047.85 & 0.03 & 9289422.16 \\ \hline
 		XGBoost & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
@@ -1387,15 +1391,15 @@
 		Linear & 7:3 & -- & -- & -- \\
 		Regression & 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		ARIMA & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		ARIMA & 7:3 & 885.22 & 0.25 & 783607.19 \\
+		& 8:2 & 0.21 & 881.31 & 776705.35 \\
+		& 9:1 & 1020.02 & 0.26 & 1040442.49 \\ \hline
 		VAR & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
-		Random Forest & 7:3 & -- & -- & -- \\
-		& 8:2 & -- & -- & -- \\
-		& 9:1 & -- & -- & -- \\ \hline
+		Random Forest & 7:3 & 98.60 & 0.03 & 9722.23 \\
+		& 8:2 & 107.43 & 0.03 & 11540.67 \\
+		& 9:1 & 140.82 & 0.04 & 19831.01 \\ \hline
 		XGBoost & 7:3 & -- & -- & -- \\
 		& 8:2 & -- & -- & -- \\
 		& 9:1 & -- & -- & -- \\ \hline
