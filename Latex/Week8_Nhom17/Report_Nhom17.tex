@@ -427,11 +427,16 @@ Hồi qui tuyến tính (Linear Regression) là một phương pháp dùng để
     \subsection{XGBOOST}
  XGBoost (Extreme Gradient Boosting) là một thuật toán học máy mạnh mẽ và hiệu quả cùng với độ chính xác cao. Thuật toán này dựa trên kỹ thuật boosting, một phương pháp kết hợp nhiều mô hình yếu để tạo thành một mô hình mạnh hơn.\\
 XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, sử dụng các cây quyết định (decision trees) làm mô hình cơ sở. Nó hoạt động bằng cách xây dựng tuần tự các cây quyết định, mỗi cây mới được tạo ra để sửa lỗi của cây trước đó.\\
-\textbf{Các tham số chính:}\\
-\textbf{Learning rate (eta):} Điều chỉnh tốc độ học của mô hình. Giá trị nhỏ giúp mô hình học chậm hơn nhưng kỹ lưỡng hơn.\\
-\textbf{Max\_depth:} Độ sâu tối đa của các cây quyết định. Giá trị lớn hơn cho phép mô hình học các mẫu phức tạp hơn nhưng có nguy cơ overfitting.\\
-\textbf{Subsample:} Tỷ lệ dữ liệu được sử dụng để xây dựng mỗi cây. Giá trị nhỏ hơn 1 giúp giảm overfitting.\\
-\textbf{Colsample\_bytree:} Tỷ lệ các đặc trưng được lấy mẫu ngẫu nhiên cho mỗi cây. Điều này giúp tăng cường tính đa dạng của các cây và giảm overfitting.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.15\textwidth}
+        \centering
+        \includegraphics[width=2\textwidth]{Figure/moTaXGBoost.png}
+    \end{minipage}
+    \hfill
+    \caption{Sơ đồ hoạt động của XGBoost}
+    \label{fig:1}
+\end{figure}
 \textbf{\color{myorange} \section{THỰC NGHIỆM}}
 
 \subsection{Xây dựng mô hình}
