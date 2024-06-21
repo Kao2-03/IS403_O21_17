@@ -168,7 +168,7 @@ Cho ví dụ sau: Khi ứng dụng vào bài toán với dữ liệu là các d�
   \item $s_{t}$ là trạng thái ẩn tại bước ($t$). Đây chính là bộ nhớ của mạng. $s_{t}$ được tính toán dựa trên cả các trạng thái ẩn phía trước và đầu vào tại bước đó: $s_{t} = f(Ux_{t} + Ws_{t-1})$. Hàm ($f$) thường là một hàm phi tuyến tính như tang hyperbolic (tanh) hay ReLu. Để làm phép toán cho phần tử ẩn đầu tiên ta cần khởi tạo thêm $s_{-1}$, thường giá trị khởi tạo được gắn bằng 0.
   \item $o_{t}$ là đầu ra tại bước ($t$). Ví dụ, muốn dự đoán từ tiếp theo có thể xuất hiện trong câu thì $o_{t}$ chính là một vec-tơ xác xuất các từ trong danh sách từ vựng: $o_{t} = softmax(Vs_{t})$
 \end{itemize}
-\subsection{CCN-LSTM (Convolutional Neural Network - Long Short-Term Memory)}
+\subsection{CNN-LSTM (Convolutional Neural Network - Long Short-Term Memory)}
 Mạng CNN-LSTM là một kiến trúc mạng nơ-ron sử dụng cả Convolutional Neural Network (CNN) và Long Short-Term Memory (LSTM). Mạng này kết hợp các lợi ích của cả hai loại mạng để xử lý dữ liệu chuỗi 2D hoặc 3D như hình ảnh hoặc video.\\
 \textbf{Convolutional Neural Network (CNN):}\\
 CNN là một loại mạng nơ-ron mà bao gồm các tính toán convolution và được chuyên biệt hóa để xử lý dữ liệu lưới tương tự. Do tính chia sẻ trọng số và kết nối cục bộ của mạng CNN, chúng đã đóng góp đáng kể trong học sâu và được sử dụng rộng rãi trong các lĩnh vực khác nhau. Mục đích chính của mạng CNN là trích xuất thông tin đặc trưng của đầu vào, chủ yếu được thực hiện bởi lớp convolutional. Vì thông tin đặc trưng được trích xuất bởi lớp convolutional là tuyến tính, dữ liệu đầu vào thường có đặc tính phi tuyến tính. Do đó, cần phải giới thiệu một hàm phi tuyến để giải quyết vấn đề này. Hàm phi tuyến này chính là hàm kích hoạt trong mạng CNN. Trong ứng dụng cụ thể của học máy, dữ liệu đầu vào thường không phải là một mảng một chiều. Ở đây, tích chập rời rạc hai chiều được sử dụng làm ví dụ để thể hiện phép tích chập, và hàm kích hoạt sử dụng hàm Relu làm ví dụ. Phép tính cụ thể được thể hiện như sau:\\
@@ -1200,6 +1200,8 @@ Cryptocurrency Forecasting”, 2021.
 \bibitem{b10} GeeksforGeeks, “XGBoost for Regression”, 10 tháng 6, 2023 [https://www.geeksforgeeks.org/xgboost-for-regression/]
 \bibitem{b11} XGBoost Developers, “Introduction to Boosted Trees”, 2022 [https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
 \bibitem{b12} Mohit Gupta OMG :), "Linear Regression in Machine learning", geeksforgeeks, 20 tháng 3, 2024, [https://www.geeksforgeeks.org/ml-linear-regression/]
+\bibitem{13} Denny Britz, "Recurrent Neural Networks Tutorial, Part 1 – Introduction to RNNs", Denny's Blog, 2015-09-17, [https://dennybritz.com/posts/wildml/recurrent-neural-networks-tutorial-part-1/]
+\bibitem{14} Xingyu Yang, "A CNN-LSTM Model Based on a Meta-Learning Algorithm to Predict Groundwater Level in the Middle and Lower Reaches of the Heihe River, China", Water 2022, 14(15), 2377, 31-07-2022, [https://www.mdpi.com/2073-4441/14/15/2377]
 \end{thebibliography}
 
 \end{document}
