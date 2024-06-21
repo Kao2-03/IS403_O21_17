@@ -16,6 +16,7 @@
 \usepackage{placeins}
 \usepackage[parfill]{parskip}
 
+
 \begin{document}
 \title{\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
 \author{\IEEEauthorblockN{\footnotesize{1. Lê Ngọc Yến Khoa, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522224@gm.uit.edu.vn}}
@@ -35,19 +36,19 @@ Nghiên cứu này sẽ sử dụng một loạt các mô hình dự báo để 
 
 Ngoài ra, nhóm cũng sẽ áp dụng các mô hình học máy như Random Forest, XGBoost, và VAR (Vector Autoregression) để đảm bảo tính linh hoạt và độ chính xác trong việc dự báo. Sự kết hợp của những mô hình này sẽ cung cấp một cái nhìn toàn diện về các xu hướng và biến động trong tỷ giá trao đổi của tiền điện tử so với USD, giúp các nhà đầu tư và chuyên gia tài chính đưa ra quyết định đầu tư thông minh và hiệu quả.
 
-\textbf{\section{NGHIÊN CỨU LIÊN QUAN}}
+\textbf{ \section{NGHIÊN CỨU LIÊN QUAN}}
 
 Có một số nghiên cứu đã được thực hiện về chủ đề này:\par
-Yecheng Yao và cộng sự \cite{b1} đã đề xuất một cách tiếp cận học sâu để dự đoán giá của tiền điện tử. Bài báo này tập trung vào việc sử dụng Long Short-Term Memory (LSTM) và Recurrent Neural Network (RNN) để phân tích dự báo giá của tiền điện tử. Các yếu tố được xem xét bao gồm vốn hóa thị trường, khối lượng giao dịch, nguồn cung lưu thông và nguồn cung tối đa. Tác giả cũng đề cập đến một số yếu tố như môi trường chính trị và quy định của con người.\par
-Muhammad Ali Nasir và cộng sự \cite{b2} đã đề xuất một mô hình trong đó lợi suất và khối lượng của tiền điện tử được dự đoán bằng cách sử dụng các công cụ tìm kiếm. Một tập dữ liệu hàng tuần từ năm 2013 đến 2017 được sử dụng và thu thập cấu trúc phụ thuộc bằng cách sử dụng các phương pháp kinh nghiệm như VAR framework, một phương pháp copulas vv.\par
-Aggarwal A. và cộng sự \cite{b3} đã thảo luận về các thông số khác nhau ảnh hưởng đến dự đoán giá Bitcoin dựa trên Root Mean Square Error (RMSE) sử dụng các mô hình học sâu như Convolutional Neural Network (CNN), Long ShortTerm Memory (LSTM) và Gated Recurrent Unit (GRU).\par
-Alessandretti, L., ElBahrawy, A., Aiello, L.M. và Baronchelli, A. \cite{b4} đã kiểm tra hiệu suất của ba mô hình trong việc dự đoán giá tiền điện tử hàng ngày cho 1681 loại tiền điện tử. Hai trong số các mô hình dựa trên cây quyết định tăng cường độ dốc và một dựa trên Long ShortTerm memory. Trong tất cả các trường hợp, các danh mục đầu tư được xây dựng dựa trên các dự đoán và hiệu suất được so sánh dựa trên lợi nhuận từ đầu tư.\par
-Mittal R. và cộng sự \cite{b5} đã dự đoán giá của tiền điện tử dựa trên giá mở, giá thấp và giá cao của chúng. Một số thuật toán Machine Leaning được sử dụng để dự đoán các thay đổi giá hàng ngày của tiền điện tử. Bộ dữ liệu được sử dụng trong bài báo này là tương đối nhỏ. Hồi quy tuyến tính đa biến đã được sử dụng để dự đoán giá cao nhất và thấp nhất của tiền điện tử.\par
+Haixu Wu và cộng sự \cite{b1} đã giới thiệu TimesNet như một mô hình nền tảng nhiệm vụ chung cho phân tích chuỗi thời gian. Thực nghiệm cho thấy, TimesNet đạt được trạng thái tối ưu liên tục trong năm nhiệm vụ phân tích chuỗi thời gian chính, bao gồm dự báo ngắn hạn và dài hạn, điền dữ liệu, phân loại và phát 
+hiện bất thường. TimesNet cho thấy hiệu suất tuyệt vời cả trong cài đặt dự báo dài hạn và ngắn hạn. Cụ thể, TimesNet đạt được trạng thái tối ưu trong hơn 80\% các trường hợp trong dự báo dài hạn \par
+Alessandretti, L., ElBahrawy, A., Aiello, L.M. và Baronchelli, A. \cite{b2} đã kiểm tra hiệu suất của ba mô hình trong việc dự đoán giá tiền điện tử hàng ngày cho 1681 loại tiền điện tử. Hai trong số các mô hình dựa trên cây quyết định tăng cường độ dốc và một dựa trên Long ShortTerm memory. Trong tất cả các trường hợp, các danh mục đầu tư được xây dựng dựa trên các dự đoán và hiệu suất được so sánh dựa trên lợi nhuận từ đầu tư.\par
+Ioannis E. Livieris \cite{b3} đã áp dụng mô hình CNN-LSTM để dự báo tiền điện tử. Kết quả thí nghiệm cho thấy mô hình LSTM mang lại kết quả cao hơn so với các mô hình thống kê truyền thống như ARIMA. Bài báo cũng trình bày kết quả thử nghiệm với các bộ dữ liệu khác nhau, cho thấy sự khác biệt và so sánh các kết quả này. Phần lớn các mô hình trên sử dụng các phương pháp độc lập như thống kê, hồi quy và học máy để dự đoán giá tiền điện tử trong tương lai. \par
+Aggarwal A. và cộng sự \cite{b4} đã thảo luận về các thông số khác nhau ảnh hưởng đến dự đoán giá Bitcoin dựa trên Root Mean Square Error (RMSE) sử dụng các mô hình học sâu như Convolutional Neural Network (CNN), Long ShortTerm Memory (LSTM) và Gated Recurrent Unit (GRU).\par
+Muhammad Ali Nasir và cộng sự \cite{b5} đã đề xuất một mô hình trong đó lợi suất và khối lượng của tiền điện tử được dự đoán bằng cách sử dụng các công cụ tìm kiếm. Một tập dữ liệu hàng tuần từ năm 2013 đến 2017 được sử dụng và thu thập cấu trúc phụ thuộc bằng cách sử dụng các phương pháp kinh nghiệm như VAR framework, phương pháp copulas vv.
 Suhwanji và cộng sự \cite{b6} đã phát triển và so sánh các mô hình dự đoán giá Bitcoin dựa trên thông tin blockchain Bitcoin. Cụ thể, họ đã kiểm tra các mô hình học sâu tiên tiến như mạng nơ-ron sâu (DNN), mô hình long short-term memory (LSTM), mạng nơ-ron tích chập (CNN), mạng nơ-ron còn sót (ResNet) và các sự kết hợp của chúng. Đối với các vấn đề hồi quy, LSTM đạt hiệu suất tốt hơn so với các mô hình khác, trong khi đối với các vấn đề phân loại, DNN đạt hiệu suất tốt hơn một chút.\par
 Phumudzo Lloyd Seabe và cộng sự \cite{b7} kết luận rằng ba loại kỹ thuật học sâu - LSTM, GRU và Bi-LSTM - đã được sử dụng để dự đoán giá của ba loại tiền điện tử lớn nhất, được đo bằng vốn hóa thị trường của chúng: Bitcoin, Ethereum và Litecoin. Kết quả của nghiên cứu cho thấy rằng mô hình Bi-LSTM cung cấp các dự đoán chính xác nhất cho cả ba loại tiền tệ, tiếp theo là mô hình GRU.\par
 Nguyen Dinh Thuan và cộng sự \cite{b8} kết luận rằng việc dự đoán giá của tiền điện tử là một công việc khó khăn, đòi hỏi nghiên cứu sâu sắc và toàn diện về thị trường tiền điện tử. Ngoài ra, nó cũng cần sự hỗ trợ của máy học và mô hình thống kê. Trong việc dự đoán giá của loại tiền này vào ngày mai. Sự kết hợp của mô hình hoặc mô hình hỗn hợp dẫn đến mô hình dự đoán với chất lượng hiệu quả hơn, như là kết quả cao hơn, tỷ lệ lỗi thấp trong chi tiết.
-
-\textbf{\section{TÀI NGUYÊN}}
+\textbf{\color{myorange} \section{TÀI NGUYÊN}}
 \subsection{Bộ dữ liệu}\label{AA}
 Tập dữ liệu được sử dụng trong nghiên cứu này được thu thập từ https://www.investing.com/, một nền tảng tài chính uy tín nổi tiếng với thông tin thị trường toàn diện và cập nhật. Tập dữ liệu này bao gồm các giá trị của ba loại tiền điện tử phổ biến nhất trên thế giới: Binance Coin, Ethereum và Bitcoin so với đồng đô la Mỹ từ ngày 01/03/2019 đến ngày 01/06/2024, cung cấp một phạm vi thời gian mạnh mẽ cho phân tích của nhóm.\\
 Mỗi mục nhập trong tập dữ liệu bao gồm các chỉ số tài chính quan trọng:\\
@@ -1170,17 +1171,23 @@ TimeNets & 7:3 & 139.94 & 5.10 & 19584.44 \\
 \end{tabular}
 \end{adjustbox}
 \end{table}
-\textbf{\section{TỔNG KẾT}}
+\textbf{\color{myorange} \section{TỔNG KẾT}}
 \begin{thebibliography}{9}
 
-\bibitem{b1} Yecheng Yao, Jungho Yi, Shengjun Zhai, Yuwen Lin, Taekseung Kim Guihongxuan Zhang, Leonard Yoonjae Lee, “Predictive Analysis of Cryptocurrency Price Using Deep Learning”, International Journal of Engineering and Technology, Volume 7, Issue 3.27, pp. 258-264, 2018 [https://www.sciencepubco.com/index.php/ijet/article/view/17889]
-\bibitem{b2} Muhammad Ali Nasir, Toan Luu Duc Huynh, Sang Phu Nguyen and Duy Duong, “Forecasting cryptocurrency returns and volume using search engines”, Financial Innovation 5, Article number 2, 2019 [https://jfin-swufe.springeropen.com/articles/10.1186/s40854-018-0119-8]
-\bibitem{b3} Aggarwal A., Gupta I., Garg N., and Goel A., “Deep Learning Approach to Determine the Impact of Socio-Economic Factors on Bitcoin Price Prediction”, Twelfth International Conference on Contemporary Computing (IC3), 2019 [https://ieeexplore.ieee.org/document/8844928]
-\bibitem{b4} Alessandretti, L.,ElBahrawy, A.,Aiello, L.M. and Baronchelli,A., 2018. Anticipating cryptocurrency prices using machine learning. Complexity, 2018. [https://www.hindawi.com/journals/complexity/2018/8983590/]
-\bibitem{b5} Mittal R., Arora S. and Bhatia M. P. S., “Automated cryptocurrencies prices prediction using machine learning”, International Journal on Soft Computing, Volume 8, Issue 4, pp. 1758-1761, 2018
+\bibitem{b1} Haixu Wu, Tengge Hu, Yong Liu, Hang Zhou, Jianmin Wang, Mingsheng LongB, "TimesNet: Temporal 2D-Variation Modeling for General Time Series Analysis",ICLR, 2023 [https://openreview.net/pdf?id=ju\_Uqw384Oqicle/view/17889]
+\bibitem{b2} Alessandretti, L.,ElBahrawy, A.,Aiello, L.M. and Baronchelli,A., 2018. Anticipating cryptocurrency prices using machine learning. Complexity, 2018. [https://www.hindawi.com/journals/complexity/2018/8983590/]
+\bibitem{b3} Ioannis E. Livieris, Niki Kiriakidou, Stavros Stavroyiannis, Panagiotis Pintelas, “An Advanced CNN-LSTM Model for 
+Cryptocurrency Forecasting”, 2021.
+\bibitem{b4} Aggarwal A., Gupta I., Garg N., and Goel A., “Deep Learning Approach to Determine the Impact of Socio-Economic Factors on Bitcoin Price Prediction”, Twelfth International Conference on Contemporary Computing (IC3), 2019 [https://ieeexplore.ieee.org/document/8844928]
+\bibitem{b5} Muhammad Ali Nasir, Toan Luu Duc Huynh, Sang Phu Nguyen and Duy Duong, “Forecasting cryptocurrency returns and volume using search engines”, Financial Innovation 5, Article number 2, 2019 [https://jfin-swufe.springeropen.com/articles/10.1186/s40854-018-0119-8]
 \bibitem{b6} Suhwan Ji, Jongmin KimORCID and Hyeonseung Im, “A Comparative Study of Bitcoin Price Prediction Using Deep Learning”, Department of Computer Science, Kangwon National University, Chuncheon-si, Gangwon-do 24341, Korea, 2019 [https://www.mdpi.com/2227-7390/7/10/898]
 \bibitem{b7} Phumudzo Lloyd Seabe, Claude Rodrigue Bambe Moutsinga, andEdson Pindza, “Forecasting Cryptocurrency Prices Using LSTM, GRU, and Bi-Directional LSTM: A Deep Learning Approach”, 2023 [https://www.mdpi.com/2504-3110/7/2/203]
-\bibitem{b8} Nguyen Dinh Thuan, Nguyen Minh Nhut, Hoang Tung, Vu Minh Sang, “PREDICTING THE CLOSING PRICE OF CRYPTOCURRENCY USING HYBRID ARIMA, REGRESSION AND MACHINE LEARNING”, Ky yeu Hoi nghi KHCN Quoc gia lan thu XIV ve Nghien cuu co ban va ung dung Cong nghe thong tin (FAIR), TP. HCM, ngay 23-24/12/2021
-
+\bibitem{b8} Nguyen Dinh Thuan, Nguyen Minh Nhut, Hoang Tung, Vu Minh Sang, “PREDICTING THE CLOSING PRICE OF CRYPTOCURRENCY USING HYBRID ARIMA, REGRESSION AND MACHINE LEARNING”, Ky yeu Hoi nghi KHCN Quoc gia lan thu XIV ve Nghien cuu co ban va ung dung Cong nghe thong tin (FAIR), TP. HCM, ngay 23-24/12/2021, Nhà xuất bản Khoa học tự nhiên và Công nghệ [http://vap.ac.vn/proceedingvap/proceeding/article/view/802]
+\bibitem{b9} Amazon Web Services, “How XGBoost works,” Amazon SageMaker, 2024 [https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-HowItWorks.html]
+\bibitem{b10} GeeksforGeeks, “XGBoost for Regression”, 10 tháng 6, 2023 [https://www.geeksforgeeks.org/xgboost-for-regression/]
+\bibitem{b11} XGBoost Developers, “Introduction to Boosted Trees”, 2022 [https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+\bibitem{b12} Mohit Gupta OMG :), "Linear Regression in Machine learning", geeksforgeeks, 20 tháng 3, 2024, [https://www.geeksforgeeks.org/ml-linear-regression/]
+\bibitem{b13} Jason Brownlee PhD, “Random Forest for Time Series Forecasting”, on November 1, 2020. [https://machinelearningmastery.com/random-forest-for-time-series-forecasting/]
 \end{thebibliography}
+
 \end{document}
