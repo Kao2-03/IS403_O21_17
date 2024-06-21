@@ -14,15 +14,11 @@
 \usepackage{xurl}
 \usepackage{adjustbox}
 \usepackage{placeins}
-\usepackage{fancyhdr} % For custom headers and footers
-\definecolor{myorange}{rgb}{1.0, 0.5, 0.0}
+\usepackage[parfill]{parskip}
 
-% Define pagestyle
-\pagestyle{fancy}
-\fancyhf{} % Clear all header and footer fields
-\fancyfoot[R]{\thepage} % Page number on the right footer
+
 \begin{document}
-\title{\color{myorange}\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
+\title{\textbf{\MakeUppercase{Dự báo giá của tiền điện tử bằng phương pháp chuỗi thời gian}}}
 \author{\IEEEauthorblockN{\footnotesize{1. Lê Ngọc Yến Khoa, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522224@gm.uit.edu.vn}}
 \IEEEauthorblockN{\footnotesize{2. Nguyễn Hữu Phụng, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522481@gm.uit.edu.vn}}
 \IEEEauthorblockN{\footnotesize{3. Trần Minh Quang, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522519@gm.uit.edu.vn}}
@@ -30,10 +26,10 @@
 \IEEEauthorblockN{\footnotesize{5. Đoàn Thị Mỹ Linh, Trường Đại học Công Nghệ Thông Tin - ĐHQG TP.HCM, Email: 21522285@gm.uit.edu.vn}}
 }
 \maketitle
-\thispagestyle{fancy} % Force page number on the first page
-\textbf{\color{myorange}TÓM TẮT NỘI DUNG} \> Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.\\
-\textbf{\color{myorange}TỪ KHÓA} \> Chuỗi thời gian, phương pháp thống kê, tỷ giá trao đổi tiền điện tử, học máy, học sâu
-\textbf{\color{myorange} \section{GIỚI THIỆU}}
+
+\textbf{TÓM TẮT NỘI DUNG} \> Nghiên cứu này sử dụng một loạt các mô hình dự báo để phân tích và dự đoán tỷ giá trao đổi của Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH) so với USD từ năm 2019 đến 2024. Bằng cách sử dụng các mô hình như TimesNet, Random Forest, CNN-LSTM, Bagging Model, và VAR để dự báo các biến động, cùng với hồi quy tuyến tính, nghiên cứu của chúng tôi nhằm cung cấp những thông tin quý báu cho các nhà đầu tư, các nhà phân tích tài chính, và những nhà quyết định chính sách trong việc điều hướng thị trường tiền điện tử dao động mạnh mẽ.\\
+\textbf{TỪ KHÓA} \> Chuỗi thời gian, phương pháp thống kê, tỷ giá trao đổi tiền điện tử, học máy, học sâu
+\textbf{\section{GIỚI THIỆU}}
 Trong thời đại hiện nay, thị trường tiền điện tử đã trở thành một phần không thể thiếu của hệ thống tài chính toàn cầu, và việc theo dõi và dự báo tỷ giá trao đổi của tiền điện tử so với USD là vô cùng quan trọng. Trong phạm vi này, nhóm tập trung vào ba loại tiền điện tử phổ biến nhất: Binance Coin (BNB), Bitcoin (BTC), và Ethereum (ETH).
 
 Nghiên cứu này sẽ sử dụng một loạt các mô hình dự báo để hiểu và dự đoán các biến động trong tỷ giá trao đổi của các loại tiền điện tử này so với USD. Cụ thể, nhóm sẽ sử dụng các mô hình hồi quy tuyến tính để phân tích các xu hướng dài hạn, và sau đó sử dụng các mạng nơ-ron như TimesNet và CNN-LSTM để khám phá mối quan hệ phức tạp giữa các yếu tố và dự báo các biến động ngắn hạn.
@@ -563,9 +559,7 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
 \end{figure}
 
 % phần của Quang
-\subsubsection{LSTM}
-
-\subsubsection{VAR}
+\subsubsection{LSTM}.
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.15\textwidth}
@@ -626,7 +620,7 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \label{fig:1}
 \end{figure}
 
-\subsubsection{VAR}
+\subsubsection{VAR}.
 
 \begin{figure}[H]
     \centering
@@ -688,8 +682,7 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \label{fig:1}
 \end{figure}
 
-\subsubsection{GRU}
-\subsubsection{GRU}
+\subsubsection{GRU}.
 	        \begin{figure}[H]
 			\centering
 			\begin{minipage}{0.15\textwidth}
@@ -749,8 +742,7 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
 	\label{fig:1}
 \end{figure}
 
-\subsubsection{TimesNet}
-\subsubsection{TimesNet}
+\subsubsection{TimesNet}.
 	        \begin{figure}[H]
 			\centering
 			\begin{minipage}{0.15\textwidth}
@@ -809,27 +801,25 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
 	\caption{Dữ liệu ETH-USD}
 	\label{fig:1}
 \end{figure}
-\subsubsection{Arima} 
 
-\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
+\subsubsection{Arima}.
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_30days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_91.png}
     \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
+    \caption{Dữ liệu BNB-USD}
     \label{fig:1}
 \end{figure}
 
@@ -837,19 +827,19 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_60days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_91.png}
     \end{minipage}
-    \caption{Dữ đoán 60 ngày tiếp theo}
+    \caption{Dữ liệu BTC-USD}
     \label{fig:1}
 \end{figure}
 
@@ -857,60 +847,40 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BNB_90days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_91.png}
     \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
+    \caption{Dữ liệu ETH-USD}
     \label{fig:1}
 \end{figure}
 
-\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
+\subsubsection{RandomForest}.
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_30days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_91.png}
     \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
+    \caption{Dữ liệu BNB-USD}
     \label{fig:1}
 \end{figure}
 
@@ -918,40 +888,19 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_BTC_90days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_91.png}
     \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
+    \caption{Dữ liệu BTC-USD}
     \label{fig:1}
 \end{figure}
 
@@ -959,229 +908,22 @@ XGBoost là một phiên bản nâng cao của thuật toán Gradient Boosting, 
     \centering
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_73.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_73.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_82.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.15\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_91.png}
+    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_91.png}
     \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
+    \caption{Dữ liệu ETH-USD}
     \label{fig:1}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-
-
-\subsubsection{Random Forest} 
-
-\paragraph{\textbf{Dữ liệu BNB}} \mbox{} \\
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_60days_91.png}
-    \end{minipage}
-    \caption{Dữ đoán 60 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BNB_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\paragraph{\textbf{Dữ liệu BTC}} \mbox{} \\
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_BTC_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\paragraph{\textbf{Dữ liệu ETH}} \mbox{} \\
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_30days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 30 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/ARIMA_ETH_60days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_60days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 60 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_73.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_82.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.15\textwidth}
-    \centering
-    \includegraphics[width=1\textwidth]{Figure/RandomForest_ETH_90days_91.png}
-    \end{minipage}
-    \caption{Dự đoán 90 ngày tiếp theo}
-    \label{fig:1}
-\end{figure}
 \subsubsection{LINEAR REGRESSION}.
     \begin{figure}[H]
 			\centering
@@ -1315,15 +1057,15 @@ Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
 Linear & 7:3 & 8.7624 & 2.1857 & 76.779 \\
 Regression & 8:2 & 8.3998 & 2.0097 & 70.558 \\
 & 9:1 & 9.9857 & 1.8286 & 99.714 \\ \hline
-ARIMA & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+ARIMA & 7:3 & 116.79 & 0.26 & 13640.51 \\
+& 8:2 & 141.78 & 0.31 & 20101.89 \\
+& 9:1 &  242.45 & 0.39 & 58784.07 \\ \hline
 VAR & 7:3 & 125.46 & 40.63 & 15740.25 \\
 & 8:2 & 124.71 & 34.50 & 15553.33 \\
 & 9:1 & 237.43 & 38.65 & 56377.28 \\ \hline
-Random Forest & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+Random Forest & 7:3 & 13.05 & 0.03 & 170.37 \\
+& 8:2 & 13.57 & 0.02 & 184.21 \\
+& 9:1 & 18.13 & 0.03 & 328.60 \\ \hline
 XGBoost & 7:3 & 10.942 & 2.7102 & 119.73 \\
 & 8:2 & 9.2927 & 1.8678 & 86.355 \\
 & 9:1 & 11.416 & 1.8123 & 130.32 \\ \hline
@@ -1358,15 +1100,15 @@ Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
 Linear & 7:3 & 716.33 & 1.5622 & 513131.7 \\
 Regression & 8:2 & 814.69 & 1.5132 & 663725.2 \\
 & 9:1 & 1030.2 & 1.5073 & 1061378.1 \\ \hline
-ARIMA & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+ARIMA & 7:3 & 22110.64 & 0.37 & 488880227.03 \\
+& 8:2 & 21697.68 & 0.28 & 470789191.01 \\
+& 9:1 & 21126.95 & 0.29 & 446348255.49 \\ \hline
 VAR & 7:3 & 18436.98 & 28.36 & 339922454.90 \\
 & 8:2 & 18624.93 & 24.28 & 346888248.93 \\
 & 9:1 & 19085.85 & 25.57 & 364269965.88 \\ \hline
-Random Forest & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+Random Forest & 7:3 & 2105.92 & 0.04 & 4434919.84 \\
+& 8:2 & 2318.98 & 0.03 & 5377686.16 \\
+& 9:1 & 3016.58 & 0.03 & 9099750.63 \\ \hline
 XGBoost & 7:3 & 1534.2 & 2.68 & 2353884.9 \\
 & 8:2 & 1737.1 & 2.6819 & 3017608.1 \\
 & 9:1 & 2256.7 & 2.7009 & 5092985.7 \\ \hline
@@ -1399,15 +1141,15 @@ Mô hình & Tỉ lệ & RMSE & MAPE & MSE \\ \hline
 Linear & 7:3 & 48.9 & 1.9803 & 2391.2 \\
 Regression & 8:2 & 52.035 & 1.8648 & 2707.69 \\
 & 9:1 & 62.583 & 1.7447 & 3916.6 \\ \hline
-ARIMA & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+ARIMA & 7:3 & 885.22 & 0.25 & 783607.19 \\
+& 8:2 & 881.31 & 0.21 & 776705.35 \\
+& 9:1 & 1020.02 & 0.26 & 1040442.49 \\ \hline
 VAR & 7:3 & 616.39 & 16.32 & 379940.82 \\
 & 8:2 & 683.96 & 16.67 & 467802.30 \\
 & 9:1 &  903.87 & 22.63 & 816988.33 \\ \hline
-Random Forest & 7:3 & -- & -- & -- \\
-& 8:2 & -- & -- & -- \\
-& 9:1 & -- & -- & -- \\ \hline
+Random Forest & 7:3 & 98.95 & 0.03 & 9790.43 \\
+& 8:2 & 107.38 & 0.03 & 11529.7584 \\
+& 9:1 & 141.13 & 0.04 & 19917.41 \\ \hline
 XGBoost & 7:3 & 61.871 & 2.2946 & 3828.1 \\
 & 8:2 & 65.447 & 2.0644 & 4283.3 \\
 & 9:1 & 81.285 & 2.33 & 6607.4 \\ \hline
@@ -1441,6 +1183,11 @@ Cryptocurrency Forecasting”, 2021.
 \bibitem{b6} Suhwan Ji, Jongmin KimORCID and Hyeonseung Im, “A Comparative Study of Bitcoin Price Prediction Using Deep Learning”, Department of Computer Science, Kangwon National University, Chuncheon-si, Gangwon-do 24341, Korea, 2019 [https://www.mdpi.com/2227-7390/7/10/898]
 \bibitem{b7} Phumudzo Lloyd Seabe, Claude Rodrigue Bambe Moutsinga, andEdson Pindza, “Forecasting Cryptocurrency Prices Using LSTM, GRU, and Bi-Directional LSTM: A Deep Learning Approach”, 2023 [https://www.mdpi.com/2504-3110/7/2/203]
 \bibitem{b8} Nguyen Dinh Thuan, Nguyen Minh Nhut, Hoang Tung, Vu Minh Sang, “PREDICTING THE CLOSING PRICE OF CRYPTOCURRENCY USING HYBRID ARIMA, REGRESSION AND MACHINE LEARNING”, Ky yeu Hoi nghi KHCN Quoc gia lan thu XIV ve Nghien cuu co ban va ung dung Cong nghe thong tin (FAIR), TP. HCM, ngay 23-24/12/2021, Nhà xuất bản Khoa học tự nhiên và Công nghệ [http://vap.ac.vn/proceedingvap/proceeding/article/view/802]
+\bibitem{b9} Amazon Web Services, “How XGBoost works,” Amazon SageMaker, 2024 [https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost-HowItWorks.html]
+\bibitem{b10} GeeksforGeeks, “XGBoost for Regression”, 10 tháng 6, 2023 [https://www.geeksforgeeks.org/xgboost-for-regression/]
+\bibitem{b11} XGBoost Developers, “Introduction to Boosted Trees”, 2022 [https://xgboost.readthedocs.io/en/latest/tutorials/model.html]
+\bibitem{b12} Mohit Gupta OMG :), "Linear Regression in Machine learning", geeksforgeeks, 20 tháng 3, 2024, [https://www.geeksforgeeks.org/ml-linear-regression/]
+\bibitem{b13} Jason Brownlee PhD, “Random Forest for Time Series Forecasting”, on November 1, 2020. [https://machinelearningmastery.com/random-forest-for-time-series-forecasting/]
 \end{thebibliography}
 
 \end{document}
